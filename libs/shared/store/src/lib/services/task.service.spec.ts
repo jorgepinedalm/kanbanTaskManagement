@@ -37,7 +37,7 @@ describe('TaskService', () => {
       })
     })
 
-    it("should not return a task from the tasks array if the id dont exist", () => {
+    it("should not return a task from the tasks array if it does not exist", () => {
       service.getTaskById(4).subscribe(task => {
         expect(task).toEqual(undefined);
       })
@@ -73,12 +73,29 @@ describe('TaskService', () => {
           expect(task?.title).toEqual("task cinco");
         })
       })
-      it("should not update the task data if the task id dont exist", () => {
+      it("should not update the task data if it does not exist", () => {
         const originalTask:Task = {idTask: 5, title: "task 5", description: "description 1", order: 1, status: "done", subtask: []}
         service['tasks'] = [...mockTasks, originalTask];
         const changedTask:Task = {idTask: 5, title: "task cinco", description: "description 1 complemento", order: 1, status: "done", subtask: []}
         service.updateTask(changedTask, 6).subscribe(task => {
           expect(task).toBeUndefined();
+        })
+      })
+    })
+
+    describe("changeOrder", () => {
+      it("should update order of task given its id to new order", () => {
+        service['tasks'] = [...mockTasks];
+        service.changeOrder(1, 3).subscribe(position => {
+          expect(service['tasks'][0].order).toEqual(position);
+          expect(service['tasks'][2].order).toEqual(1);
+        })
+      })
+
+      it("should not update order of task if it does not exist", () => {
+        service['tasks'] = [...mockTasks];
+        service.changeOrder(5, 3).subscribe(() => {
+          expect(service['tasks'][0].order).toEqual(1);
         })
       })
     })

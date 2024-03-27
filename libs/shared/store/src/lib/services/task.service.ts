@@ -42,7 +42,7 @@ export class TaskService {
     if(foundTaskIndex > -1){
       const prevOrder = this.tasks[foundTaskIndex].order;
       this.tasks[foundTaskIndex].order = position;
-      this.tasks[position].order = prevOrder;
+      this.tasks[position - 1].order = prevOrder;
     }
     return of(position);
   }
