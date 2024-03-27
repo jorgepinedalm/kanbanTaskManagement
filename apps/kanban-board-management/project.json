@@ -20,7 +20,11 @@
           "apps/kanban-board-management/src/favicon.ico",
           "apps/kanban-board-management/src/assets"
         ],
-        "styles": ["apps/kanban-board-management/src/styles.scss"],
+        "styles": [
+          "apps/kanban-board-management/src/styles.scss",
+          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+          "node_modules/primeng/resources/primeng.min.css"
+        ],
         "scripts": []
       },
       "configurations": {
