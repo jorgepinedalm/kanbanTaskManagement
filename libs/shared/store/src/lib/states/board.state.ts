@@ -13,7 +13,7 @@ import { tap } from "rxjs";
     }
 })
 @Injectable()
-export class AppState {
+export class BoardState {
     constructor(private _boardService: BoardService) { }
 
     @Selector()
