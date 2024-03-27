@@ -1,4 +1,4 @@
-import { Task } from "./task.models";
+import { Task } from "./task.model";
 
 export interface ColumnStatus{
     idColumnStatus:number;
