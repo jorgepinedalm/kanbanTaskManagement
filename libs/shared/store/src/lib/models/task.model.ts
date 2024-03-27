@@ -6,4 +6,5 @@ export interface Task{
     description:string;
     subtask:Subtask[];
     status:string;    
+    order:number;
   }
