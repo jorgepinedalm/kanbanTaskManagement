@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class TaskService {
-  tasks:Task[];
+  private tasks:Task[];
   
   constructor() { 
     this.tasks = [];
@@ -21,7 +21,8 @@ export class TaskService {
   }
 
   addTasks(taskData:Task):Observable<Task>{
-    return of(taskData);
+    this.tasks = [...this.tasks, taskData];
+    return of(this.tasks[this.tasks.length - 1]);
   }
 
   deleteTask(id:number){
