@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Board } from '../models/board.model';
 import { Observable, of } from 'rxjs';
+import { MockDataService } from './mock-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,8 @@ import { Observable, of } from 'rxjs';
 export class BoardService {
   private boards:Board[];
   
-  constructor() { 
-    this.boards = [];
+  constructor(private _mockDataService:MockDataService) { 
+    this.boards = this._mockDataService.getBoards();
   }
 
   fetchBoards():Observable<Board[]>{

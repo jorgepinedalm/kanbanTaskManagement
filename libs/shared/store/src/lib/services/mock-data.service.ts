@@ -5,7 +5,7 @@ import { Board } from '../models/board.model';
   providedIn: 'root'
 })
 export class MockDataService {
-  board:Board[];
+  private board:Board[];
   constructor() { 
     this.board = [
       { 
@@ -317,5 +317,9 @@ export class MockDataService {
         ] 
       }
     ]
+  }
+
+  getBoards():Board[]{
+    return this.board;
   }
 }
