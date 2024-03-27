@@ -23,7 +23,7 @@ describe('TaskService', () => {
   describe("fetchTasks", () => {
     it("should returns tasks", () => {
       
-      (service as any).tasks = mockTasks;
+      service['tasks'] = [...mockTasks];
       service.fetchTasks().subscribe(tasks => {
         expect(tasks).toEqual(mockTasks);
       })
@@ -32,12 +32,14 @@ describe('TaskService', () => {
 
   describe("getTaskById", () => {
     it("should return a task from the tasks array given its id", () => {
+      service['tasks'] = [...mockTasks];
       service.getTaskById(2).subscribe(task => {
         expect(task?.idTask).toEqual(2);
       })
     })
 
     it("should not return a task from the tasks array if it does not exist", () => {
+      service['tasks'] = [...mockTasks];
       service.getTaskById(4).subscribe(task => {
         expect(task).toEqual(undefined);
       })
