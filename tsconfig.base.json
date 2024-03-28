@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@board-management/shared-store": ["libs/shared/store/src/index.ts"]
+      "@board-management/shared-store": ["libs/shared/store/src/index.ts"],
+      "@board-management/ui": ["libs/shared/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,6 @@
+<div class="lib-header">
+    <img src="/assets/ui/kanban-logo.JPG" alt="Logo Kanban">
+    @for (item of boards$ | async; track item) {
+        <p>{{item.name}}</p>
+    }
+</div>

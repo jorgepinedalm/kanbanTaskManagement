@@ -18,7 +18,12 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/kanban-board-management/src/favicon.ico",
-          "apps/kanban-board-management/src/assets"
+          "apps/kanban-board-management/src/assets",
+          {
+            "input": "libs/shared/ui/src/assets",
+            "glob": "**/*",
+            "output": "assets/ui"
+          }
         ],
         "styles": [
           "apps/kanban-board-management/src/styles.scss",
