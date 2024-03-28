@@ -1,0 +1,18 @@
+@import 'libs/shared/ui/src/styles/_mixins.scss';
+.kanban-board{
+    padding: 1rem;
+    @include element("columns"){
+        display: flex;
+        @include element("column"){
+            width: 30%;
+            padding: .25rem .5rem;
+        }
+    }
+}
+.column-color{
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: grey;
+}

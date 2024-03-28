@@ -1,0 +1,10 @@
+.task{
+    background-color: var(--bg-light);
+    color: var(--font-color);
+    padding: 1rem .75rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    .task__title strong{
+        font-weight: 500;
+    }
+}

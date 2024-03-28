@@ -1,0 +1,12 @@
+<div class="column" *ngIf="columnStatus">
+    <h3 class="column__title">
+        <span class="column-color" aria-hidden="true"></span>
+        {{columnStatus.name | uppercase}} ({{columnStatus.tasks.length}})
+    </h3>
+    <div class="column__tasks">
+        @for (task of columnStatus.tasks; track task) {
+            <lib-task class="column__tasks__task" [task]="task"></lib-task>
+        }     
+    </div>
+    
+</div>
