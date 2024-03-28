@@ -1,9 +1,10 @@
 @import 'libs/shared/ui/src/styles/_mixins.scss';
 @import 'libs/shared/ui/src/styles/_variables.scss';
+@import 'libs/shared/ui/src/styles/_themes.scss';
 .lib-sidebar{
     height: 100vh;
     background-color: $bg-light-color;
-    border-right: 1px solid #dddddd;
+    border-right: 1px solid $border-color;
     @include element('header'){
         padding: 1rem;
         img{
