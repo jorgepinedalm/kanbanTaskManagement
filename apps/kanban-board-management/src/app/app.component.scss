@@ -1,0 +1,13 @@
+@import 'libs/shared/ui/src/styles/_mixins.scss';
+.board-layout{
+    background-color: #fbfbfb;
+    display: flex;
+    width: 100%;
+    @include element("sidebar"){
+        width: 280px;
+        flex: none;
+    }
+    @include element("content"){
+        flex-grow: 1;
+    }
+}
