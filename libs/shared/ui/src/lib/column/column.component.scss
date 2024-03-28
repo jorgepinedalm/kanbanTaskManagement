@@ -12,7 +12,8 @@
         padding: .5rem .25rem;
         border-radius: 8px;
         border: 1px dashed transparent;
-        &.cdk-drop-list-receiving{
+        min-height: 80px;
+        &.cdk-drop-list-receiving, &.cdk-drop-list-dragging{
             border: 1px dashed var(--border-color);
         }
     }

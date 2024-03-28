@@ -1,4 +1,4 @@
-<div class="task" *ngIf="task">
+<div class="task" *ngIf="task" (click)="openTaskDetail()">
     <p class="task__title"><strong>{{task.title}}</strong></p>
     <small class="task__subtask-count">{{task.subtask.length}} substasks</small>
 </div>
