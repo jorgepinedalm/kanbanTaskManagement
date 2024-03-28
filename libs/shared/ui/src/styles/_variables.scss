@@ -1,0 +1,20 @@
+$bg-light-color: #ffffff;
+$primary-light-color: #5a55b9;
+$text-light-color: #23232d;
+
+$bg-dark-color: #23232d;
+$primary-dark-color: #5a55b9;
+$text-dark-color: #ffffff;
+
+// mixin that enables css variables in light mode
+@mixin lighten() {
+    --bgColor: #{$bg-light-color};
+    --textColor: #{$text-light-colort};
+  }
+  
+// mixin that enables css variables in dark mode
+@mixin darken() {
+--bgColor: #{$bg-dark-color};
+--textColor: #{$textColor_dark};
+--borderColor: #{$primary-dark-color};
+}
