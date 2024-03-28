@@ -2,6 +2,10 @@
     <div class="lib-sidebar__header">
         <ng-content select="[header]"></ng-content>
     </div>
-    
-    <ng-content select="[body]"></ng-content>
+    <div class="lib-sidebar__body">
+        <ng-content select="[body]"></ng-content>
+    </div>
+    <div class="lib-sidebar__footer">
+        <lib-dark-mode></lib-dark-mode>
+    </div>
 </div>

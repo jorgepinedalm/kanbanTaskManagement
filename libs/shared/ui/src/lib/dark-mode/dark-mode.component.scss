@@ -1,0 +1,19 @@
+@import 'libs/shared/ui/src/styles/_mixins.scss';
+.dark-mode{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.05);
+    padding: .75rem;
+    padding-bottom: .5rem;
+    border-radius: 4px;
+    @include element('switch'){
+        margin-left: 1rem;
+        margin-right: 1rem;
+        line-height: 1;
+    }
+    @include element('icon'){
+        font-size: 1.25rem;
+    }
+}
