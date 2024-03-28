@@ -3,10 +3,13 @@
         <span class="column-color" aria-hidden="true"></span>
         {{columnStatus.name | uppercase}} ({{columnStatus.tasks.length}})
     </h3>
-    <div class="column__tasks">
-        @for (task of columnStatus.tasks; track task) {
-            <lib-task class="column__tasks__task" [task]="task"></lib-task>
-        }     
+    <div>
+        <div class="column__tasks" cdkDropList [id]="'list-'+ indexColumn"  [cdkDropListData]="columnStatus.tasks" (cdkDropListDropped)="drop($event)">
+            @for (task of columnStatus.tasks; track task) {
+                <lib-task class="column__tasks__task" [task]="task" cdkDragBoundary=".kanban-board" cdkDrag></lib-task>
+            }     
+        </div>
     </div>
+    
     
 </div>

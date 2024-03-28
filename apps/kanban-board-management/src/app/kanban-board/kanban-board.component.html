@@ -1,7 +1,7 @@
 <div class="kanban-board" *ngIf="board">
-    <div class="kanban-board__columns">
-        @for (column of board.columnStatus; track column) {
-            <lib-column class="kanban-board__columns__column" [columnStatus]="column"></lib-column>
+    <div class="kanban-board__columns" cdkDropListGroup>
+        @for (column of board.columnStatus; track column; let idx = $index) {
+            <lib-column class="kanban-board__columns__column" [columnStatus]="column" [indexColumn]="idx"></lib-column>
         }
     </div>
     
