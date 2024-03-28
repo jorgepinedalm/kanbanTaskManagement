@@ -1,6 +1,8 @@
 <div class="lib-header">
-    <img src="/assets/ui/kanban-logo.JPG" alt="Logo Kanban">
-    @for (item of boards$ | async; track item) {
-        <p>{{item.name}}</p>
-    }
+    <h1 class="lib-header__title">
+        <ng-content select="[title]"></ng-content>
+    </h1>
+    <div class="lib-header__actions">
+        <ng-content select="[actions]"></ng-content>
+    </div>
 </div>
