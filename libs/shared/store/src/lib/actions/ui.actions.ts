@@ -6,7 +6,11 @@ export class GetUIConfig {
 // Toggle dark mode
 export class ToggleDarkMode  {
     static readonly type = '[UI] on/off dark mode';
-    constructor(public darkMode: boolean) { }
+    constructor(public darkModeStatus: boolean) { }
+}
+
+export class GetDarkModeStatus  {
+    static readonly type = '[UI] get dark mode status';
 }
 
 //Toggle sidebar visibility

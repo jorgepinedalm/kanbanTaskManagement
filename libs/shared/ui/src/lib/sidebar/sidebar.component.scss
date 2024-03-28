@@ -1,6 +1,4 @@
 @import 'libs/shared/ui/src/styles/_mixins.scss';
-@import 'libs/shared/ui/src/styles/_variables.scss';
-@import 'libs/shared/ui/src/styles/_themes.scss';
 
 ::ng-deep{
     .lib-sidebar__header img{
@@ -9,8 +7,8 @@
 }
 .lib-sidebar{
     height: 100vh;
-    background-color: $bg-light-color;
-    border-right: 1px solid $border-color;
+    background-color: var(--bg-light);
+    border-right: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     @include element('header'){
@@ -22,7 +20,5 @@
     @include element('footer'){
         padding: 1rem;
     }
-    &.dark-mode{
-        background-color: $bg-dark-color;
-    }
+    
 }

@@ -315,6 +315,16 @@ export class MockDataService {
             ]
           }
         ] 
+      },
+      {
+        idBoard: 2,
+        name: "Marketing Plan",
+        columnStatus: []
+      },
+      {
+        idBoard: 3,
+        name: "Roadmap",
+        columnStatus: []
       }
     ]
   }

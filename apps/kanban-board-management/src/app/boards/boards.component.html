@@ -3,7 +3,7 @@
 <ul class="boards__boards-list">
     @for (board of boards$ | async; track board) {
         <li class="boards__boards-list__board">
-            <a [routerLink]="['/kanban-board/', board.idBoard]" routerLinkActive="router-link-active" >
+            <a [routerLink]="['/kanban-board/', board.idBoard]" routerLinkActive="board-active" >
                 <span class="material-symbols-outlined"> space_dashboard </span> {{board.name}}</a>
         </li>
     }

@@ -2,7 +2,7 @@
     <span class="material-symbols-outlined dark-mode__icon">
         light_mode
     </span>
-    <lib-switch class=" dark-mode__switch"></lib-switch>
+    <lib-switch [(ngModel)]="darkModeStatus" (ngModelChange)="changeDarkModeStatus()" class=" dark-mode__switch"></lib-switch>
     <span class="material-symbols-outlined dark-mode__icon">
         dark_mode
     </span>

@@ -5,13 +5,15 @@
         display: block;
         padding: .5rem 1.25rem;
         font-size: 85%;
+        color: var(--font-color);
     }
     @include element("boards-list"){
         list-style: none;
         margin: 0;
         padding: .25rem;
         padding-right: 1rem;
-        background-color: $bg-light-color;
+        background-color: var(--bg-light);
+        color: var(--font-color);
         @include element("board"){
             background-color: inherit;
             a {
@@ -22,7 +24,12 @@
                 border-top-right-radius: 50px;
                 border-bottom-right-radius: 50px;
                 &:hover{
-                    background-color: #eeeeee;
+                    background-color: var(--primary-hover-color);
+                    color: var(--primary-hover-text-color);
+                }
+                &.board-active{
+                    background-color: var(--primary-color);
+                    color: var(--primary-text-color);
                 }
                 & > span:first-child{
                     display: inline-block;
