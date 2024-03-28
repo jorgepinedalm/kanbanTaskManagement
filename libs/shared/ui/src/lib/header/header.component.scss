@@ -1,8 +1,7 @@
-@import 'libs/shared/ui/src/styles/_variables.scss';
-@import 'libs/shared/ui/src/styles/_themes.scss';
 .lib-header{
-    background-color: $bg-light-color;
-    border-bottom: 1px solid $border-color;
+    background-color: var(--bg-light);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--font-color);
     width: 100%;
     padding: 1.25rem 1rem;
     display: flex;

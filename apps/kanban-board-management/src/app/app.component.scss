@@ -1,6 +1,7 @@
 @import 'libs/shared/ui/src/styles/_mixins.scss';
 .board-layout{
-    background-color: #fbfbfb;
+    background-color: var(--bg-color);
+    color: var(--font-color);
     display: flex;
     width: 100%;
     @include element("sidebar"){
