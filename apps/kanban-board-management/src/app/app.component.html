@@ -9,7 +9,7 @@
         </lib-sidebar>
     </div>
     <div class="board-layout__content">
-        <lib-header>
+        <lib-header class="board-layout__content__header">
             <ng-container title>
              {{board?.name}}
             </ng-container>
@@ -17,7 +17,10 @@
                 actions
             </ng-container>
         </lib-header> 
-        <router-outlet></router-outlet>
+        <div class="board-layout__content__router">
+            <router-outlet></router-outlet>
+        </div>
+        
     </div>
 </div>
 
