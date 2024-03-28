@@ -1,0 +1,16 @@
+@import 'libs/shared/ui/src/styles/_mixins.scss';
+@import 'libs/shared/ui/src/styles/_variables.scss';
+.lib-sidebar{
+    height: 100vh;
+    background-color: $bg-light-color;
+    border-right: 1px solid #dddddd;
+    @include element('header'){
+        padding: 1rem;
+        img{
+            height: 48px;
+        }
+    }
+    &.dark-mode{
+        background-color: $bg-dark-color;
+    }
+}
