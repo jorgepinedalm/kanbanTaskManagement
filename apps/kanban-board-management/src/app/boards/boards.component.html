@@ -1,0 +1,9 @@
+<div class="boards"></div>
+<span class="boards__title">ALL BOARDS ({{(boards$ | async)?.length}})</span>
+<ul class="boards__boards-list">
+    @for (board of boards$ | async; track board) {
+        <li class="boards__boards-list__board">
+            <a [routerLink]="['/board/', board.idBoard]" routerLinkActive="router-link-active" >{{board.name}}</a>
+        </li>
+    }
+</ul>

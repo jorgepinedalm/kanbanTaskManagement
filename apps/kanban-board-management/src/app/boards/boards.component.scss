@@ -1,0 +1,29 @@
+@import 'libs/shared/ui/src/styles/_variables.scss';
+@import 'libs/shared/ui/src/styles/_mixins.scss';
+.boards{
+    @include element("title"){
+        display: block;
+        padding: .5rem 1.25rem;
+        font-size: 85%;
+    }
+    @include element("boards-list"){
+        list-style: none;
+        margin: 0;
+        padding: .25rem;
+        padding-right: 1rem;
+        background-color: $bg-light-color;
+        @include element("board"){
+            background-color: inherit;
+            a {
+                display: inline-block;
+                padding: .5rem 1.25rem;
+                width: 100%;
+                border-top-right-radius: 50px;
+                border-bottom-right-radius: 50px;
+                &:hover{
+                    background-color: #eeeeee;
+                }
+            }
+        }
+    }
+}
