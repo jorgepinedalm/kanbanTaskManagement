@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Task } from '@board-management/shared-store';
-import { CheckboxComponent } from '@board-management/ui';
+import { CheckboxComponent, DropdownComponent } from '@board-management/ui';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, CheckboxComponent],
+  imports: [CommonModule, FormsModule, CheckboxComponent, DropdownComponent],
   templateUrl: './task-detail.component.html',
   styleUrl: './task-detail.component.scss',
 })

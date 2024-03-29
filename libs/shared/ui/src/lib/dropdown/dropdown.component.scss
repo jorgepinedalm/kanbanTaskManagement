@@ -1,0 +1,19 @@
+::ng-deep{
+    .lib-dropdown, .lib-dropdown-panel{
+        background-color: var(--bg-light);
+        color: var(--font-color);
+        border: 1px solid var(--border-color);
+    }
+    .lib-dropdown-panel .p-dropdown-header{
+        background-color: var(--bg-light);
+        color: var(--font-color);
+        .p-inputtext{
+            background-color: var(--bg-light);
+            color: var(--font-color);
+            border: 1px solid var(--border-color);
+        }
+    }
+    .lib-dropdown .p-dropdown-trigger-icon{
+        color: var(--primary-color);
+    }
+}

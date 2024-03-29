@@ -28,4 +28,10 @@
             }
         }
     }
+    @include element("status"){
+        label{
+            display: block;
+            margin-bottom: .25rem;
+        }
+    }
 }

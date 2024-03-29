@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 
-export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: Provider = {
+export const CUSTOM_CHECKBOX_CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => CheckboxComponent),
   multi: true
@@ -15,7 +15,7 @@ export const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: Provider = {
   imports: [CommonModule, FormsModule, CheckboxModule],
   templateUrl: './checkbox.component.html',
   styleUrl: './checkbox.component.scss',
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+  providers: [CUSTOM_CHECKBOX_CONTROL_VALUE_ACCESSOR]
 })
 export class CheckboxComponent implements ControlValueAccessor {
 
