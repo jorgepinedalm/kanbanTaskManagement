@@ -13,6 +13,6 @@
     </div>
     <div class="task-detail__status">
         <label for="status">Status</label>
-        <lib-dropdown inputId="status" [(ngModel)]="task.status" [options]="columnStatus" optionValue="name" optionLabel="name" styleClass="w-full" placeholder="Select a status"></lib-dropdown>
+        <lib-dropdown inputId="status" [(ngModel)]="task.status" (ngModelChange)="changeStatus(task)" [options]="columnStatus" optionValue="name" optionLabel="name" styleClass="w-full" placeholder="Select a status"></lib-dropdown>
     </div>
 </div>

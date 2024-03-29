@@ -43,7 +43,7 @@ export class ChangeOrder {
 }
 
 //Status
-export class ChangeStatus {
+export class ChangeTaskStatus {
     static readonly type = '[Tasks] Change status';
-    constructor(public id: number, status:string) { }
+    constructor(public id: number, public status:string) { }
 }
