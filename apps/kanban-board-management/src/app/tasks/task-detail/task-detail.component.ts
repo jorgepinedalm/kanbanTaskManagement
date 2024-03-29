@@ -28,12 +28,17 @@ export class TaskDetailComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new GetStatusFromBoard(this.idBoard));
     this.getColumnStatus();
+    this.countSubtaskInDone();
   }
 
   getColumnStatus(): void{
     this.columnStatus$?.subscribe(columStatus => {
       this.columnStatus = columStatus;
     })
+  }
+
+  countSubtaskInDone(): void {
+    if(this.task) this.task.countSubtaskInDone = this.task.subtask.filter(subtask => subtask.isDone).length;
   }
 
 }

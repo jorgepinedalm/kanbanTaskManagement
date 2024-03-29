@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '@board-management/shared-store';
 import { UIEventsService } from '../../services/ui-libs-events.service';
@@ -10,12 +10,17 @@ import { UIEventsService } from '../../services/ui-libs-events.service';
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
 })
-export class TaskComponent {
+export class TaskComponent implements OnChanges {
   @Input() task?:Task;
 
   constructor(
     private _uiEventsService:UIEventsService
   ){
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['task'] && this.task){
+      this.task.countSubtaskInDone = this.task.subtask.filter(subtask => subtask.isDone).length;
+    }
   }
 
   openTaskDetail(){

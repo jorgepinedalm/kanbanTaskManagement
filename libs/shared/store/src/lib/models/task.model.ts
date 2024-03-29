@@ -7,4 +7,5 @@ export interface Task{
     subtask:Subtask[];
     status:string;    
     order:number;
+    countSubtaskInDone?:number
   }
