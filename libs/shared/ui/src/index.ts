@@ -6,5 +6,7 @@ export * from './lib/close-icon-task-template/close-icon-task-template.component
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/dropdown/dropdown.component';
 export * from './lib/button/button.component';
+export * from './lib/input-text/input-text.component';
+export * from './lib/textarea/textarea.component';
 export * from './services/ui-libs-events.service';
 export * from './directives/strikeOutText.directive';
