@@ -4,8 +4,8 @@ export interface Task{
     idTask:number;
     title:string;
     description:string;
-    subtask:Subtask[];
+    subtasks:Subtask[];
     status:string;    
-    order:number;
+    order?:number;
     countSubtaskInDone?:number
   }

@@ -38,7 +38,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   countSubtaskInDone(): void {
-    if(this.task) this.task.countSubtaskInDone = this.task.subtask.filter(subtask => subtask.isDone).length;
+    if(this.task) this.task.countSubtaskInDone = this.task.subtasks.filter(subtask => subtask.isDone).length;
   }
 
   saveChange(subtask:Subtask): void {

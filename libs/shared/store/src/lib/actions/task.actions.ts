@@ -15,7 +15,7 @@ export class GetTaskById {
 //Create
 export class AddTasks {
     static readonly type = '[Tasks] Add';
-    constructor(public payload: Task) { }
+    constructor(public payload: Task, public idBoard:number) { }
 }
 
 //Update

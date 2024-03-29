@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
-import { Observable, of } from 'rxjs';
+import { Observable, max, of } from 'rxjs';
 import { MockDataService } from './mock-data.service';
 import { Board } from '../models/board.model';
 
@@ -29,9 +29,9 @@ export class TaskService {
     for(const board of this.boards){
       for(const column of board.columnStatus){
         for(const task of column.tasks){
-          const subtaskIndex = task.subtask.findIndex(subtask => subtask.idSubtask === idSubtask);
+          const subtaskIndex = task.subtasks.findIndex(subtask => subtask.idSubtask === idSubtask);
           if(subtaskIndex > -1){
-            task.subtask[subtaskIndex].isDone = status;
+            task.subtasks[subtaskIndex].isDone = status;
             foundBoard = board;
             break;
           }
@@ -59,5 +59,55 @@ export class TaskService {
     }
     localStorage.setItem("boards", JSON.stringify(this.boards));
     return of(foundBoard);
+  }
+
+  addTask(idBoard:number, task:Task):Observable<Board | undefined>{
+    const board = this.boards.find(board => board.idBoard === idBoard);
+    const columnStatus = board?.columnStatus.find(column => column.name === task.status);
+    task.idTask = this.getNextTaskId(idBoard);
+    let currentMaxId = this.getNextSubTaskId(idBoard);
+    for(const subtask of task.subtasks){
+      subtask.idSubtask = currentMaxId++;
+    }
+    columnStatus?.tasks.push(task);
+    return of(board);
+  }
+
+  /**
+   * Generate id of new task
+   */
+  private getNextTaskId(idBoard:number):number{
+    let maxId = 0;
+    const board = this.boards.find(board => board.idBoard === idBoard);
+    if(board){
+      for (const column of board.columnStatus) {
+        for (const task of column.tasks) {
+          if (task.idTask > maxId) {
+            maxId = task.idTask;
+          }
+        }
+      }
+    }
+    return maxId + 1;
+  }
+
+  /**
+   * Generate maxid for new subtasks
+   */
+  private getNextSubTaskId(idBoard:number):number{
+    let maxId = 0;
+    const board = this.boards.find(board => board.idBoard === idBoard);
+    if(board){
+      for (const column of board.columnStatus) {
+        for (const task of column.tasks) {
+          for (const subtask of task.subtasks) {
+            if (subtask.idSubtask > maxId) {
+              maxId = subtask.idSubtask;
+            }
+          }
+        }
+      }
+    }
+    return maxId + 1;
   }
 }

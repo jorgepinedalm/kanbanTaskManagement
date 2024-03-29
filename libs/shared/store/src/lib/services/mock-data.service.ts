@@ -7,7 +7,7 @@ import { Board } from '../models/board.model';
 export class MockDataService {
   private board:Board[];
   constructor() { 
-    const initialBoards = [
+    const initialBoards:Board[] = [
       { 
         idBoard: 1, 
         name: "Platform Launch", 
@@ -23,7 +23,7 @@ export class MockDataService {
                 order: 1,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "todo",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 1,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -47,7 +47,7 @@ export class MockDataService {
                 order: 2,
                 description: "",
                 status: "todo",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 4,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -61,7 +61,7 @@ export class MockDataService {
                 order: 3,
                 description: "",
                 status: "todo",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 5,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -80,7 +80,7 @@ export class MockDataService {
                 order: 4,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "todo",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 7,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -106,7 +106,7 @@ export class MockDataService {
                 order: 1,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "doing",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 9,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -130,7 +130,7 @@ export class MockDataService {
                 order: 2,
                 description: "",
                 status: "doing",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 12,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -154,7 +154,7 @@ export class MockDataService {
                 order: 3,
                 description: "",
                 status: "doing",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 15,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -178,7 +178,7 @@ export class MockDataService {
                 order: 4,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "doing",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 18,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -197,7 +197,7 @@ export class MockDataService {
                 order: 5,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "doing",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 20,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -216,7 +216,7 @@ export class MockDataService {
                 order: 6,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "doing",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 22,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -247,7 +247,7 @@ export class MockDataService {
                 order: 1,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "done",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 25,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -261,7 +261,7 @@ export class MockDataService {
                 order: 2,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "done",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 26,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -275,7 +275,7 @@ export class MockDataService {
                 order: 3,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "done",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 27,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",
@@ -299,7 +299,7 @@ export class MockDataService {
                 order: 4,
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna. Proin sit amet massa porttitor, congue dui eu, ullamcorper justo. Etiam maximus velit et odio porttitor hendrerit. Vivamus posuere ante vitae sapien.",
                 status: "done",
-                subtask: [
+                subtasks: [
                   {
                     idSubtask: 30,
                     title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed ultricies libero, non convallis magna.",

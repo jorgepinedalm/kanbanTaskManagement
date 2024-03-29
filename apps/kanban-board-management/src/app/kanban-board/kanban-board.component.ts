@@ -6,6 +6,21 @@ import { Select, Store } from '@ngxs/store';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Observable, Subscription } from 'rxjs';
 import { TaskDetailComponent } from '../tasks/task-detail/task-detail.component';
+import { TaskCreateComponent } from '../tasks/task-create/task-create.component';
+
+const configDynamicDialog = {
+  width: "33vw",
+  modal:true,
+  closable: true,
+  closeOnEscape: true,
+  dismissableMask: true,
+  styleClass: "app-dynamic-dialog",
+  breakpoints: {
+      '1440px': '45vw',
+      '1024px': '55vw',
+      '640px': '90vw'
+  },
+}
 
 @Component({
   selector: 'app-kanban-board',
@@ -34,6 +49,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getDataBoard();
     this.getClickedTask();
+    this.listenClickInNewTaskButton();
   }
 
   getRouteParam(): void{
@@ -52,27 +68,27 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   getClickedTask(): void {
-    this._uiEventService.clickTask().subscribe(task => {
+    const subscription = this._uiEventService.clickTask().subscribe(task => {
       if(task){
         this.showTaskDetails(task);
       }
     })
+    this.subscriptions.push(subscription);
+  }
+
+  listenClickInNewTaskButton(): void {
+    const subscription = this._uiEventService.clickNewTask().subscribe(isClicked => {
+      if(isClicked){
+        this.showNewTaskModal();
+      }
+    })
+    this.subscriptions.push(subscription);
   }
 
   showTaskDetails(task:Task): void {
     this._dialogService.open(TaskDetailComponent, {
       header: task.title,
-      width: "33vw",
-      modal:true,
-      closable: true,
-      closeOnEscape: true,
-      dismissableMask: true,
-      styleClass: "app-dynamic-dialog",
-      breakpoints: {
-          '1440px': '45vw',
-          '1024px': '55vw',
-          '640px': '90vw'
-      },
+      ...configDynamicDialog,
       data: {
         id: task.idTask,
         idBoard: this.board?.idBoard,
@@ -81,6 +97,17 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       templates: {
         closeicon: CloseIconTaskTemplateComponent
       }
-  });
+    });
+  }
+
+  showNewTaskModal(): void {
+    this._dialogService.open(TaskCreateComponent, {
+      header: "Add New Task",
+      ...configDynamicDialog,
+      data: {
+        idBoard: this.board?.idBoard,
+        board: this.board
+      }
+    });
   }
 }

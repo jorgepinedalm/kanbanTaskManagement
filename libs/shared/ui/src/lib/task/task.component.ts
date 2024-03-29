@@ -19,7 +19,7 @@ export class TaskComponent implements OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['task'] && this.task){
-      this.task.countSubtaskInDone = this.task.subtask.filter(subtask => subtask.isDone).length;
+      this.task.countSubtaskInDone = this.task.subtasks.filter(subtask => subtask.isDone).length;
     }
   }
 

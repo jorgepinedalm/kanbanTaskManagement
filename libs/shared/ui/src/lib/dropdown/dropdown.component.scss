@@ -19,4 +19,12 @@
     .lib-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight{
         color: var(--primary-color);
     }
+    .lib-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled).p-focus,
+    .lib-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover{
+        background-color: var(--bg-color);
+        color: var(--font-color);
+    }
+    .lib-dropdown .p-dropdown-label.p-inputtext{
+        padding: .5rem .75rem;
+    }
 }

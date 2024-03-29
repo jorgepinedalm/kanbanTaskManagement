@@ -14,7 +14,7 @@
              {{board?.name}}
             </ng-container>
             <ng-container actions>
-                <lib-button type="button" styleClass="button-add-task">
+                <lib-button type="button" styleClass="button-add-task" (clicked)="showNewTaskButton()">
                     + Add New Task
                 </lib-button>
             </ng-container>

@@ -1,0 +1,33 @@
+<form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+    <div class="form-control">
+        <label for="title">Title</label>
+        <lib-input-text type="text" formControlName="title" inputId="title" [required]="true" placeholder="e.g. Take coffee break" styleClass="w-full"></lib-input-text>
+    </div>
+    <div class="form-control">
+        <label for="description">Description</label>
+        <lib-textarea inputId="description" formControlName="description" placeholder="e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little." rows="3" styleClass="w-full"></lib-textarea>
+    </div>
+    <div class="form-control">
+        <span class="form-control__label">Substask</span>
+        <ul class="subtasks" formArrayName="subtasks">
+            @for (subtaskControl of subtasks.controls; track subtaskControl; let idx = $index) {
+                <li class="subtasks__subtask" [formGroupName]="idx">
+                    <lib-input-text type="text" class="subtasks__subtask__input" formControlName="title" [inputId]="'subtask-'+idx" [required]="true" placeholder="e.g. Take coffee break" styleClass="w-full"></lib-input-text>
+                    <span role="button" class="material-symbols-outlined" (click)="deleteSubtask(idx)">
+                        close
+                    </span>
+                </li>
+            }            
+        </ul>
+        <lib-button type="button" styleClass="lib-button-secondary w-full" (click)="addSubtask()">
+            + Add New Subtask
+        </lib-button>
+    </div>
+    <div class="form-control">
+        <label for="status">Status</label>
+        <lib-dropdown inputId="status" formControlName="status" [options]="columnStatus" optionValue="name" optionLabel="name" styleClass="w-full" placeholder="Select a status"></lib-dropdown>
+    </div>    
+    <lib-button type="submit" styleClass="w-full">
+        Create Task
+    </lib-button>
+</form>

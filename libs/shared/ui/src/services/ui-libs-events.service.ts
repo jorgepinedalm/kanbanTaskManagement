@@ -8,9 +8,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UIEventsService {
 
   private clickTask$: BehaviorSubject<Task | undefined>;
+  private clickNewTask$: BehaviorSubject<boolean>;
 
   constructor() { 
     this.clickTask$ = new BehaviorSubject<Task | undefined>(undefined);
+    this.clickNewTask$ = new BehaviorSubject<boolean>(false);
   }
 
   clickTask():Observable<Task | undefined>{
@@ -23,5 +25,13 @@ export class UIEventsService {
    */
   onClickTask(task:Task ): void {
     this.clickTask$.next(task);
+  }
+
+  clickNewTask(): Observable<boolean>{
+    return this.clickNewTask$.asObservable();
+  }
+
+  onClickNewTask(): void {
+    this.clickNewTask$.next(true);
   }
 }

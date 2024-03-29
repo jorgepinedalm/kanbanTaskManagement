@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, HeaderComponent, SidebarComponent } from "@board-management/ui";
+import { ButtonComponent, HeaderComponent, SidebarComponent, UIEventsService } from "@board-management/ui";
 import { BoardsComponent } from './boards/boards.component';
 import { Select } from '@ngxs/store';
 import { Board, BoardState } from '@board-management/shared-store';
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   board?:Board;
 
-  constructor(){
+  constructor(private uiEventsService:UIEventsService){
     this.subscription = new Subscription();
   }
   
@@ -36,6 +36,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription = this.selectedBoard$?.subscribe(board => {
       this.board = board;
     }) as Subscription;
+  }
+
+  showNewTaskButton():void{
+    this.uiEventsService.onClickNewTask();
   }
   
 }

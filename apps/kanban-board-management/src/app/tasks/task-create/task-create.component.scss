@@ -1,0 +1,9 @@
+.subtasks__subtask{
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    .subtasks__subtask__input{
+        flex-grow: 1;
+        margin-right: .5rem;
+    }
+}
