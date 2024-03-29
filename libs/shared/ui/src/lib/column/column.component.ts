@@ -31,6 +31,8 @@ export class ColumnComponent {
                         event.previousIndex,
                         event.currentIndex);
       const idColumn = event.container.element.nativeElement.dataset["idcolumn"];
+      const columnName = event.container.element.nativeElement.dataset["columnname"] || "";
+      event.container.data[event.currentIndex].status = columnName;
       if(idColumn) this.store.dispatch(new UpdateTasksInColumn(event.container.data as Task[], +idColumn));
       
     }
