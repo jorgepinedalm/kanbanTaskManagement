@@ -5,7 +5,8 @@
         <ul class="task-detail__subtasks__subtasks-list">
             @for (subtask of task.subtask; track subtask) {
             <li class="task-detail__subtasks__subtasks-list__item">
-                {{subtask.title}}
+                <lib-checkbox class="task-detail__subtasks__subtasks-list__item__checkbox" [(ngModel)]="subtask.isDone"></lib-checkbox> 
+                <span class="task-detail__subtasks__subtasks-list__item__text">{{subtask.title}}</span>
             </li>
             }
         </ul>

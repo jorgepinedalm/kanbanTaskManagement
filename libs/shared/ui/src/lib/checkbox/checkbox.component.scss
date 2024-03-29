@@ -1,0 +1,13 @@
+::ng-deep{
+    .lib-checkbox{
+        .p-checkbox-box.p-highlight{
+            background-color: var(--primary-color);
+        }
+        .p-checkbox-box:not(.p-highlight){
+            background-color: var(--bg-light);
+        }
+        .p-checkbox-box{
+            border: 1px solid var(--border-color);
+        }
+    }
+}
