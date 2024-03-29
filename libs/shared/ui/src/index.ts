@@ -5,5 +5,6 @@ export * from './lib/task/task.component';
 export * from './lib/close-icon-task-template/close-icon-task-template.component';
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/dropdown/dropdown.component';
+export * from './lib/button/button.component';
 export * from './services/ui-libs-events.service';
 export * from './directives/strikeOutText.directive';

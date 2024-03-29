@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent, SidebarComponent } from "@board-management/ui";
+import { ButtonComponent, HeaderComponent, SidebarComponent } from "@board-management/ui";
 import { BoardsComponent } from './boards/boards.component';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Board, BoardState } from '@board-management/shared-store';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, SidebarComponent, BoardsComponent],
+  imports: [CommonModule, RouterModule, HeaderComponent, SidebarComponent, BoardsComponent, ButtonComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
