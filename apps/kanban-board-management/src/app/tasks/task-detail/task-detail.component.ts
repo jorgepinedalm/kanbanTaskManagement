@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { BoardState, ColumnStatus, GetStatusFromBoard, Task } from '@board-management/shared-store';
-import { CheckboxComponent, DropdownComponent } from '@board-management/ui';
+import { CheckboxComponent, DropdownComponent, StrikeOutTextDirective } from '@board-management/ui';
 import { FormsModule } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-task-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, CheckboxComponent, DropdownComponent],
+  imports: [CommonModule, FormsModule, CheckboxComponent, DropdownComponent, StrikeOutTextDirective],
   templateUrl: './task-detail.component.html',
   styleUrl: './task-detail.component.scss',
 })
