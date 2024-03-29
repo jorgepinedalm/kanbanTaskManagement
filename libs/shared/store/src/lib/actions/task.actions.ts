@@ -19,9 +19,9 @@ export class AddTasks {
 }
 
 //Update
-export class UpdateTasks {
-    static readonly type = '[Tasks] Update';
-    constructor(public payload: Task, public id: number) { }
+export class UpdateTasksInColumn {
+    static readonly type = '[Tasks] Update in Column';
+    constructor(public payload: Task[], public idColumn: number) { }
 }
 
 //Delete
@@ -40,4 +40,10 @@ export class MoveTask {
 export class ChangeOrder {
     static readonly type = '[Tasks] Change order';
     constructor(public id: number, position:number) { }
+}
+
+//Status
+export class ChangeStatus {
+    static readonly type = '[Tasks] Change status';
+    constructor(public id: number, status:string) { }
 }

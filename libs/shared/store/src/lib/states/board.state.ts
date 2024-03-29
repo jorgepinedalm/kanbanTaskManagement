@@ -5,6 +5,8 @@ import { BoardService } from "../services/board.service";
 import { GetBoardById, GetBoards, GetStatusFromBoard } from "../actions/board.actions";
 import { tap } from "rxjs";
 import { ColumnStatus } from "../models/column-status.model";
+import { UpdateTasksInColumn } from "../actions/task.actions";
+import { TaskService } from "../services/task.service";
 
 @State<BoardStateModel>({
     name: 'appstate',
@@ -16,7 +18,7 @@ import { ColumnStatus } from "../models/column-status.model";
 })
 @Injectable()
 export class BoardState {
-    constructor(private _boardService: BoardService) { }
+    constructor(private _boardService: BoardService, private _taskService: TaskService) { }
 
     @Selector()
     static selectStateBoard(state:BoardStateModel){
@@ -71,6 +73,20 @@ export class BoardState {
                 ctx.patchState({
                     ...state,
                     columnStatus: status
+                });
+            }
+        }));
+    }
+
+    @Action(UpdateTasksInColumn)
+    updateTasksInColumn(ctx: StateContext<BoardStateModel>, { payload, idColumn }: UpdateTasksInColumn) {
+        return this._taskService.updateTaskInColumn(idColumn, payload).pipe(tap((returnData) => {
+            const state = ctx.getState();
+            const board = state.boards.find(board => board.idBoard == returnData?.idBoard);
+            if (board) {
+                ctx.patchState({
+                    ...state,
+                    selectedBoard: returnData
                 });
             }
         }));

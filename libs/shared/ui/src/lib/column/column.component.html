@@ -4,9 +4,9 @@
         {{columnStatus.name | uppercase}} ({{columnStatus.tasks.length}})
     </h3>
     <div>
-        <div class="column__tasks" cdkDropList [id]="'list-'+ indexColumn"  [cdkDropListData]="columnStatus.tasks" (cdkDropListDropped)="drop($event)">
+        <div class="column__tasks" cdkDropList [id]="'list-'+ indexColumn" [attr.data-idColumn]="columnStatus.idColumnStatus"  [cdkDropListData]="columnStatus.tasks" (cdkDropListDropped)="drop($event)">
             @for (task of columnStatus.tasks; track task) {
-                <lib-task class="column__tasks__task" [task]="task" cdkDragBoundary=".kanban-board" cdkDrag></lib-task>
+                <lib-task class="column__tasks__task" [task]="task" cdkDragBoundary=".board-layout__content__router" cdkDrag></lib-task>
             }     
         </div>
     </div>

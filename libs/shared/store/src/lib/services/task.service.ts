@@ -1,49 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
 import { Observable, of } from 'rxjs';
+import { MockDataService } from './mock-data.service';
+import { Board } from '../models/board.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private tasks:Task[];
+  private boards:Board[];
   
-  constructor() { 
-    this.tasks = [];
+  constructor(private _mockDataService:MockDataService) { 
+    this.boards = this._mockDataService.getBoards();
   }
 
-  fetchTasks():Observable<Task[]>{
-    return of(this.tasks);
-  }
-
-  getTaskById(id:number):Observable<Task | undefined>{
-    return of(this.tasks.find(task => task.idTask == id))
-  }
-
-  addTasks(taskData:Task):Observable<Task>{
-    this.tasks = [...this.tasks, taskData];
-    return of(this.tasks[this.tasks.length - 1]);
-  }
-
-  deleteTask(id:number){
-    return of(this.tasks.filter(task => task.idTask != id));
-  }
-
-  updateTask(payload:Task,id:number){
-    let foundTask = this.tasks.find(task => task.idTask == id);
-    if(foundTask){
-      foundTask = {...foundTask, ...payload};
+  updateTaskInColumn(idColumn:number, tasks:Task[]):Observable<Board | undefined>{
+    const board = this.boards.find(board => board.columnStatus.findIndex(column => column.idColumnStatus === idColumn) > -1);
+    if(board){
+      const column = board.columnStatus.find(column => column.idColumnStatus == idColumn);
+      if (column) column.tasks = tasks;
     }
-    return of(foundTask);
-  }
-
-  changeOrder(id:number, position:number):Observable<number>{
-    const foundTaskIndex = this.tasks.findIndex(task => task.idTask === id);
-    if(foundTaskIndex > -1){
-      const prevOrder = this.tasks[foundTaskIndex].order;
-      this.tasks[foundTaskIndex].order = position;
-      this.tasks[position - 1].order = prevOrder;
-    }
-    return of(position);
+    localStorage.setItem("boards", JSON.stringify(this.boards));
+    return of(board);
   }
 }

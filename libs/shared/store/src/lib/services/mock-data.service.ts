@@ -7,7 +7,7 @@ import { Board } from '../models/board.model';
 export class MockDataService {
   private board:Board[];
   constructor() { 
-    this.board = [
+    const initialBoards = [
       { 
         idBoard: 1, 
         name: "Platform Launch", 
@@ -327,6 +327,9 @@ export class MockDataService {
         columnStatus: []
       }
     ]
+    const boardsInLocalstorage = localStorage.getItem("boards");
+    this.board = boardsInLocalstorage ? JSON.parse(boardsInLocalstorage) as Board[] : initialBoards;
+
   }
 
   getBoards():Board[]{
