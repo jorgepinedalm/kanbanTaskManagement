@@ -1,0 +1,17 @@
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+.form-control{
+    margin-bottom: 1rem;
+    label{
+        display: block;
+        margin-bottom: .25rem;
+        font-size: .875rem;
+        color: var(--font-color);
+        font-weight: 500;
+    }
+}

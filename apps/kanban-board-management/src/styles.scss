@@ -1,14 +1,2 @@
 @import 'libs/shared/ui/src/styles/_variables.scss';
-body{
-    background-color: $bg-light-color;
-    &.dark-mode{
-        background-color: $bg-dark-color;
-    }
-}
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
+@import 'libs/shared/ui/src/styles/_globals.scss';
