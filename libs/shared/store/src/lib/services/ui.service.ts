@@ -20,7 +20,8 @@ export class UiService {
   }
 
   getDarkModeStatus():Observable<boolean>{
-    const isDarkMode = localStorage.getItem("isDarkMode") == "true";
+    const themeInLocalstorage = localStorage.getItem("isDarkMode");
+    const isDarkMode = themeInLocalstorage === "true" || window.matchMedia('(prefers-color-scheme: dark)').matches;
     return of(isDarkMode);
   }
 }
