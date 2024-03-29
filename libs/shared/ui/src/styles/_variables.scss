@@ -1,15 +1,8 @@
-$bg-light-color: #ffffff;
-$primary-light-color: #5a55b9;
-$text-light-color: #23232d;
-
-$bg-dark-color: #23232d;
-$primary-dark-color: #5a55b9;
-$text-dark-color: #ffffff;
-
 :root {
   --bg-color: #fafafa;
   --bg-light: #ffffff;
   --font-color: #23232d;
+  --font-secondary-color: #6b7280;
   --font-light: #23232d;
   --primary-color: #5a55b9!important;
   --primary-text-color: #ffffff;
@@ -21,6 +14,7 @@ body.dark-theme {
   --bg-color: #1e1e23;
     --bg-light: #23232d;
     --font-color: #fdfdfd;
+    --font-secondary-color: #E5E7EB;
     --font-light: #ffffff;
     --primary-color: #5a55b9!important;
     --primary-hover-color: #e9d5ff;
