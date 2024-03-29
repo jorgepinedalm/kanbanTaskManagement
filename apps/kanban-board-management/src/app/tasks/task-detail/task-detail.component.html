@@ -1,0 +1,13 @@
+<div class="task-detail" *ngIf="task">
+    <p class="task-detail__description">{{task.description}}</p>
+    <div class="task-detail__subtasks">
+        <strong class="task-detail__subtasks__title">Subtask (- of {{task.subtask.length}})</strong>
+        <ul class="task-detail__subtasks__subtasks-list">
+            @for (subtask of task.subtask; track subtask) {
+            <li class="task-detail__subtasks__subtasks-list__item">
+                {{subtask.title}}
+            </li>
+            }
+        </ul>
+    </div>
+</div>

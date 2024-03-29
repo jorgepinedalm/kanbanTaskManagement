@@ -1,0 +1,26 @@
+@import 'libs/shared/ui/src/styles/_mixins.scss';
+.task-detail{
+    @include element("description"){
+        margin-bottom: 1rem;
+        font-size: .875rem;
+    }
+    @include element("subtasks"){
+        @include element("title"){
+            display: block;
+            margin-bottom: .875rem;
+        }
+        @include element("subtasks-list"){
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 1rem;
+            @include element("item"){
+                background-color: var(--bg-color);
+                margin-bottom: .5rem;
+                border-radius: 8px;
+                padding: .5rem;
+                font-size: .875rem;
+            }
+        }
+    }
+}
