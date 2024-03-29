@@ -23,4 +23,22 @@ export class TaskService {
     localStorage.setItem("boards", JSON.stringify(this.boards));
     return of(board);
   }
+
+  updateSubtaskStatusInTask(idSubtask:number, status: boolean):Observable<Board | undefined>{
+    let foundBoard = undefined;
+    for(const board of this.boards){
+      for(const column of board.columnStatus){
+        for(const task of column.tasks){
+          const subtaskIndex = task.subtask.findIndex(subtask => subtask.idSubtask === idSubtask);
+          if(subtaskIndex > -1){
+            task.subtask[subtaskIndex].isDone = status;
+            foundBoard = board;
+            break;
+          }
+        }
+      }
+    }
+    localStorage.setItem("boards", JSON.stringify(this.boards));
+    return of(foundBoard);
+  }
 }

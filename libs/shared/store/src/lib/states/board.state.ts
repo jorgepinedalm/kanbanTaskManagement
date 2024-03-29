@@ -7,6 +7,7 @@ import { tap } from "rxjs";
 import { ColumnStatus } from "../models/column-status.model";
 import { UpdateTasksInColumn } from "../actions/task.actions";
 import { TaskService } from "../services/task.service";
+import { ChangeSubtaskStatus } from "../actions/subtask.actions";
 
 @State<BoardStateModel>({
     name: 'appstate',
@@ -81,6 +82,20 @@ export class BoardState {
     @Action(UpdateTasksInColumn)
     updateTasksInColumn(ctx: StateContext<BoardStateModel>, { payload, idColumn }: UpdateTasksInColumn) {
         return this._taskService.updateTaskInColumn(idColumn, payload).pipe(tap((returnData) => {
+            const state = ctx.getState();
+            const board = state.boards.find(board => board.idBoard == returnData?.idBoard);
+            if (board) {
+                ctx.patchState({
+                    ...state,
+                    selectedBoard: returnData
+                });
+            }
+        }));
+    }
+
+    @Action(ChangeSubtaskStatus)
+    updateSubtaskStatusInTask(ctx: StateContext<BoardStateModel>, { idSubtask, status}: ChangeSubtaskStatus) {
+        return this._taskService.updateSubtaskStatusInTask(idSubtask, status).pipe(tap((returnData) => {
             const state = ctx.getState();
             const board = state.boards.find(board => board.idBoard == returnData?.idBoard);
             if (board) {

@@ -1,5 +1,5 @@
 //Change status
-export class ChangeStatus {
+export class ChangeSubtaskStatus {
     static readonly type = '[Subtask] Change status';
-    constructor(public idSubtask: number, status:boolean) { }
+    constructor(public idSubtask: number, public status:boolean) { }
 }

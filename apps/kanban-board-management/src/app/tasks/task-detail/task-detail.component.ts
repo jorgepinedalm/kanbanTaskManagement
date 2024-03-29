@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { BoardState, ColumnStatus, GetStatusFromBoard, Task } from '@board-management/shared-store';
+import { BoardState, ChangeSubtaskStatus, ColumnStatus, GetStatusFromBoard, Subtask, Task } from '@board-management/shared-store';
 import { CheckboxComponent, DropdownComponent, StrikeOutTextDirective } from '@board-management/ui';
 import { FormsModule } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
@@ -39,6 +39,11 @@ export class TaskDetailComponent implements OnInit {
 
   countSubtaskInDone(): void {
     if(this.task) this.task.countSubtaskInDone = this.task.subtask.filter(subtask => subtask.isDone).length;
+  }
+
+  saveChange(subtask:Subtask): void {
+    this.countSubtaskInDone();
+    this.store.dispatch(new ChangeSubtaskStatus(subtask.idSubtask, subtask.isDone));
   }
 
 }
