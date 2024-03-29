@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ColumnStatus, Task, UpdateTasksInColumn } from '@board-management/shared-store';
-import { TaskComponent } from '../task/task.component';
+import { TaskComponent } from '../../molecules/task/task.component';
 import {DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Store } from '@ngxs/store';
 

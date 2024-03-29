@@ -70,6 +70,7 @@ export class TaskService {
       subtask.idSubtask = currentMaxId++;
     }
     columnStatus?.tasks.push(task);
+    localStorage.setItem("boards", JSON.stringify(this.boards));
     return of(board);
   }
 

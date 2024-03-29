@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DarkModeComponent } from '../dark-mode/dark-mode.component';
+import { DarkModeComponent } from '../../molecules/dark-mode/dark-mode.component';
 
 @Component({
   selector: 'lib-sidebar',

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '@board-management/shared-store';
-import { UIEventsService } from '../../services/ui-libs-events.service';
+import { UIEventsService } from '../../../services/ui-libs-events.service';
 
 @Component({
   selector: 'lib-task',

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SwitchComponent } from '../switch/switch.component';
+import { SwitchComponent } from '../../atoms/switch/switch.component';
 import { FormsModule } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { GetDarkModeStatus, ToggleDarkMode, UIState } from "@board-management/shared-store";
