@@ -22,6 +22,8 @@ export class DropdownComponent implements ControlValueAccessor {
   @Input() options:unknown[];
   @Input() inputId?:string; 
   @Input() disabled:boolean;
+  @Input() optionLabel?:string;
+  @Input() optionValue?:string;
   @Input() filter:boolean;
   @Input() placeholder?:string;
   @Input() required:boolean;

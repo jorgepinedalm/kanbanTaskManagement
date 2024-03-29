@@ -75,6 +75,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
       },
       data: {
         id: task.idTask,
+        idBoard: this.board?.idBoard,
         task:task
       },
       templates: {

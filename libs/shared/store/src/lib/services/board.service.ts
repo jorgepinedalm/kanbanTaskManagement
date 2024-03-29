@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Board } from '../models/board.model';
 import { Observable, of } from 'rxjs';
 import { MockDataService } from './mock-data.service';
+import { ColumnStatus } from '../models/column-status.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,5 +37,14 @@ export class BoardService {
       foundBoard = {...foundBoard, ...payload};
     }
     return of(foundBoard);
+  }
+
+  getStatusFromBoard(idBoard:number):Observable<ColumnStatus[]>{
+    let status:ColumnStatus[] = [];
+    const board = this.boards.find(board => board.idBoard == idBoard);
+    if(board){
+      status = board.columnStatus;
+    }
+    return of(status);
   }
 }

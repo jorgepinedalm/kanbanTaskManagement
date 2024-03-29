@@ -3,9 +3,10 @@
 panelStyleClass="lib-dropdown-panel"
 [inputId]="inputId" 
 [options]="options" 
-optionLabel="name" 
+[optionLabel]="optionLabel" 
+[optionValue]="optionValue"
 [filter]="filter" 
-filterBy="name"
+[filterBy]="optionLabel"
 [(ngModel)]="value"
 appendTo="body"
 [placeholder]="placeholder"></p-dropdown> 

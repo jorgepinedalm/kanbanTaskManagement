@@ -2,13 +2,15 @@ import { Injectable } from "@angular/core";
 import { State, Selector, Action, StateContext } from "@ngxs/store";
 import { BoardStateModel } from "./board.state.model";
 import { BoardService } from "../services/board.service";
-import { GetBoardById, GetBoards } from "../actions/board.actions";
+import { GetBoardById, GetBoards, GetStatusFromBoard } from "../actions/board.actions";
 import { tap } from "rxjs";
+import { ColumnStatus } from "../models/column-status.model";
 
 @State<BoardStateModel>({
     name: 'appstate',
     defaults: {
         boards: [],
+        columnStatus: [],
         selectedBoard: undefined
     }
 })
@@ -24,6 +26,11 @@ export class BoardState {
     @Selector()
     static selectSelectedBoard(state: BoardStateModel) {
         return state.selectedBoard;
+    }
+
+    @Selector()
+    static selectStateColumnStatus(state:BoardStateModel){
+        return state.columnStatus;
     }
 
     @Action(GetBoards)
@@ -50,5 +57,24 @@ export class BoardState {
             }
         }));
     }
+
+    @Action(GetStatusFromBoard)
+    getStatusFromBoard(ctx: StateContext<BoardStateModel>, { idBoard }: GetStatusFromBoard) {
+        return this._boardService.getStatusFromBoard(idBoard).pipe(tap(() => {
+            const state = ctx.getState();
+            let status:ColumnStatus[] = [];
+            const board = state.boards.find(board => board.idBoard == idBoard);
+            if(board){
+              status = board.columnStatus;
+            }
+            if (board) {
+                ctx.patchState({
+                    ...state,
+                    columnStatus: status
+                });
+            }
+        }));
+    }
+
 }
 

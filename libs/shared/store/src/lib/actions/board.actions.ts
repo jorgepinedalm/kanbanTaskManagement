@@ -28,3 +28,9 @@ export class DeleteBoards {
     static readonly type = '[Boards] Delete';
     constructor(public id: number) { }
 }
+
+// Get status from board
+export class GetStatusFromBoard {
+    static readonly type = '[Boards] Get Status';
+    constructor(public idBoard: number) { }
+}

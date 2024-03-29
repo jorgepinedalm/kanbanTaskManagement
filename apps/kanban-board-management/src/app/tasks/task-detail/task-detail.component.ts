@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { Task } from '@board-management/shared-store';
+import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { BoardState, ColumnStatus, GetStatusFromBoard, Task } from '@board-management/shared-store';
 import { CheckboxComponent, DropdownComponent } from '@board-management/ui';
 import { FormsModule } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task-detail',
@@ -12,9 +14,26 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './task-detail.component.html',
   styleUrl: './task-detail.component.scss',
 })
-export class TaskDetailComponent {
+export class TaskDetailComponent implements OnInit {
   task?:Task;
-  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig){
+  idBoard:number;
+  @Select(BoardState.selectStateColumnStatus) columnStatus$?: Observable<ColumnStatus[]>;
+  columnStatus:ColumnStatus[];
+  
+  constructor(public config: DynamicDialogConfig, private store:Store){
     this.task = config.data.task;
+    this.columnStatus = [];
+    this.idBoard = config.data.idBoard;
   }
+  ngOnInit(): void {
+    this.store.dispatch(new GetStatusFromBoard(this.idBoard));
+    this.getColumnStatus();
+  }
+
+  getColumnStatus(): void{
+    this.columnStatus$?.subscribe(columStatus => {
+      this.columnStatus = columStatus;
+    })
+  }
+
 }
