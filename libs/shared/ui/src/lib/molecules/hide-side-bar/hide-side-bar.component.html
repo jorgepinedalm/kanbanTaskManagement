@@ -1,0 +1,16 @@
+<div class="sidebar-visibility">
+    <button type="button" class="sidebar-visibility__button" (click)="toggleSidebarVibility()">
+        @if (hideSidebar) {
+            <span class="material-symbols-outlined">
+                visibility
+            </span>
+            <span class="sidebar-visibility__text">Show sidebar</span>
+        }@else{
+            <span class="material-symbols-outlined">
+                visibility_off
+            </span>
+            <span class="sidebar-visibility__text">Hide sidebar</span>
+        }
+        
+    </button>
+</div>

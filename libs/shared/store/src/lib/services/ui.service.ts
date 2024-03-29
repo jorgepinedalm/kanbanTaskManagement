@@ -7,10 +7,12 @@ import { Observable, of } from 'rxjs';
 export class UiService {
 
   isDarkMode:boolean;
+  hideSidebar:boolean;
   constructor(
 
   ) {
     this.isDarkMode = false;
+    this.hideSidebar = false;
    }
 
   toggleDarkMode(currentStatus:boolean):Observable<boolean>{
@@ -23,5 +25,15 @@ export class UiService {
     const themeInLocalstorage = localStorage.getItem("isDarkMode");
     const isDarkMode = themeInLocalstorage === "true" || window.matchMedia('(prefers-color-scheme: dark)').matches;
     return of(isDarkMode);
+  }
+
+  toggleHideSidebar(currentStatus:boolean):Observable<boolean>{
+    this.hideSidebar = currentStatus;
+    localStorage.setItem("hideSidebar", ""+this.hideSidebar);
+    return of(this.hideSidebar);
+  }
+  getSideBarVisibility():Observable<boolean>{
+    const hideSidebar = localStorage.getItem("hideSidebar") === "true";
+    return of(hideSidebar);
   }
 }

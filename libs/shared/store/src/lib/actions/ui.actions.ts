@@ -1,8 +1,3 @@
-//get cofig
-export class GetUIConfig {
-    static readonly type = '[UI] Get config';
-}
-
 // Toggle dark mode
 export class ToggleDarkMode  {
     static readonly type = '[UI] on/off dark mode';
@@ -14,7 +9,11 @@ export class GetDarkModeStatus  {
 }
 
 //Toggle sidebar visibility
-export class ToggleSideBar {
+export class ToggleSidebar {
     static readonly type = '[UI] Toggle sidebar visibility';
-    constructor(public sidebarVisible: boolean) { }
+    constructor(public hideSidebar: boolean) { }
+}
+
+export class GetSidebarVisibility  {
+    static readonly type = '[UI] get sidebar visibility status';
 }

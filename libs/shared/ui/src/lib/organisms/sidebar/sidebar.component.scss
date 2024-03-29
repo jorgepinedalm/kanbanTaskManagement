@@ -4,6 +4,30 @@
     .lib-sidebar__header img{
         height: 48px;
     }
+    body.hide-sidebar{
+        .boards__boards-list__board__name, .boards__title, .dark-mode__icon, .sidebar-visibility__text{
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+        .boards__title{
+            height: 2.5rem;
+        }
+        .board-layout__sidebar, .lib-sidebar{
+            width: 80px;
+        }
+        .lib-sidebar__footer{
+            padding: 1rem .5rem;
+        }
+        .boards__boards-list{
+            padding-right: .5rem;
+        }
+    }
 }
 .lib-sidebar{
     height: 100vh;

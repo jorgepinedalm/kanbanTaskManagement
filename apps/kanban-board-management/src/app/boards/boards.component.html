@@ -4,7 +4,9 @@
     @for (board of boards$ | async; track board) {
         <li class="boards__boards-list__board">
             <a [routerLink]="['/kanban-board/', board.idBoard]" routerLinkActive="board-active" >
-                <span class="material-symbols-outlined"> space_dashboard </span> {{board.name}}</a>
+                <span class="material-symbols-outlined"> space_dashboard </span> 
+                <span class="boards__boards-list__board__name">{{board.name}}</span>
+            </a>
         </li>
     }
 </ul>
