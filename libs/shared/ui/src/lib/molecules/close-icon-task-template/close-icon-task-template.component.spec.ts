@@ -4,10 +4,12 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
 import { ToastModule } from 'primeng/toast';
+import { UIEventsService } from '../../../services/ui-libs-events.service';
 
 describe('CloseIconTaskTemplateComponent', () => {
   let component: CloseIconTaskTemplateComponent;
   let fixture: ComponentFixture<CloseIconTaskTemplateComponent>;
+  let uiEventService:UIEventsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -18,6 +20,7 @@ describe('CloseIconTaskTemplateComponent', () => {
     fixture = TestBed.createComponent(CloseIconTaskTemplateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    uiEventService = TestBed.inject(UIEventsService);
   });
 
   it('should create', () => {
@@ -28,7 +31,7 @@ describe('CloseIconTaskTemplateComponent', () => {
     const id = 123;
     const config = { data: { id } };
     const ref = {} as DynamicDialogRef;
-    component = new CloseIconTaskTemplateComponent(ref, config);
+    component = new CloseIconTaskTemplateComponent(ref, config, uiEventService);
     expect(component.idTask).toEqual(id);
   });
 
@@ -36,7 +39,7 @@ describe('CloseIconTaskTemplateComponent', () => {
     const id = 123;
     const config = { data: { id } };
     const ref = {} as DynamicDialogRef;
-    component = new CloseIconTaskTemplateComponent(ref, config);
+    component = new CloseIconTaskTemplateComponent(ref, config, uiEventService);
     expect(component.items?.length).toBeGreaterThan(0);
   });
 

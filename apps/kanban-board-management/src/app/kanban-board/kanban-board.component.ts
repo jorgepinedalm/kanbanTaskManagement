@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Board, BoardState, GetBoardById, Task } from '@board-management/shared-store';
-import { CloseIconTaskTemplateComponent, UIEventsService } from "@board-management/ui";
+import { CloseIconTaskTemplateComponent, UIEvent, UIEventsService } from "@board-management/ui";
 import { Select, Store } from '@ngxs/store';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Observable, Subscription } from 'rxjs';
@@ -49,8 +49,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.getDataBoard();
-    this.getClickedTask();
-    this.listenClickInNewTaskButton();
+    this.listenUIEvents();
   }
 
   getRouteParam(): void{
@@ -69,21 +68,23 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
     this.subscriptions.push(subscription);
   }
 
-  getClickedTask(): void {
-    const subscription = this.uiEventService.clickTask().subscribe(task => {
-      if(task){
-        this.showTaskDetails(task);
+  listenUIEvents(): void {
+    const subscription = this.uiEventService.eventClick().subscribe(
+      event => {
+        if(event){
+          switch (event.action) {
+            case UIEvent.clickTask:
+                this.showTaskDetails(event.data?.task as Task);
+              break;
+            case UIEvent.clickNewTask:
+                this.showNewTaskModal();
+              break;
+            default:
+              break;
+          }
+        }
       }
-    })
-    this.subscriptions.push(subscription);
-  }
-
-  listenClickInNewTaskButton(): void {
-    const subscription = this.uiEventService.clickNewTask().subscribe(isClicked => {
-      if(isClicked){
-        this.showNewTaskModal();
-      }
-    })
+    );
     this.subscriptions.push(subscription);
   }
 

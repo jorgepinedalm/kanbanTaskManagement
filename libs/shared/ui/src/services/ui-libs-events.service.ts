@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from '@board-management/shared-store';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { UIEvents } from '../models/ui-events.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,12 @@ export class UIEventsService {
 
   private clickTask$: BehaviorSubject<Task | undefined>;
   private clickNewTask$: BehaviorSubject<boolean>;
+  private actionClick$: BehaviorSubject<UIEvents | null>;
 
   constructor() { 
     this.clickTask$ = new BehaviorSubject<Task | undefined>(undefined);
     this.clickNewTask$ = new BehaviorSubject<boolean>(false);
+    this.actionClick$ = new BehaviorSubject<UIEvents | null>(null);
   }
 
   clickTask():Observable<Task | undefined>{
@@ -33,5 +36,13 @@ export class UIEventsService {
 
   onClickNewTask(): void {
     this.clickNewTask$.next(true);
+  }
+
+  eventClick(): Observable<UIEvents | null>{
+    return this.actionClick$.asObservable();
+  }
+
+  setEvent(event:UIEvents): void {
+    this.actionClick$.next(event);
   }
 }

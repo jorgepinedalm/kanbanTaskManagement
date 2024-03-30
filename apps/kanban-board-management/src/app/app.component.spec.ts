@@ -18,7 +18,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     uiEventsServiceMock = {
-      onClickNewTask: jest.fn()
+      setEvent: jest.fn()
     };
 
     mockSelectedBoard$ = new BehaviorSubject<Board | undefined>(undefined);
@@ -91,6 +91,6 @@ describe('AppComponent', () => {
   it('should call onClickNewTask on showNewTaskButton', () => {
     component.showNewTaskButton();
 
-    expect(uiEventsServiceMock.onClickNewTask).toHaveBeenCalled();
+    expect(uiEventsServiceMock.setEvent).toHaveBeenCalled();
   });
 });

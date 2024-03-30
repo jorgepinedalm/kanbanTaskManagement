@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { KanbanBoardComponent } from './kanban-board.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ColumnComponent, UIEventsService } from '@board-management/ui';
+import { ColumnComponent, UIEvent, UIEventsService } from '@board-management/ui';
 import { DialogService } from 'primeng/dynamicdialog';
 import { NgxsModule, Select, Store } from '@ngxs/store';
 import { Board, BoardState, Task } from '@board-management/shared-store';
@@ -60,12 +60,10 @@ describe('KanbanBoardComponent', () => {
   describe("ngOnInit", () => {
     it("should call initial functions", () => {
       const getDataBoardSpy = jest.spyOn(component, "getDataBoard").mockImplementation(jest.fn());
-      const getClickedTaskSpy = jest.spyOn(component, "getClickedTask").mockImplementation(jest.fn());
-      const listenClickInNewTaskButtonSpy = jest.spyOn(component, "listenClickInNewTaskButton").mockImplementation(jest.fn());
+      const listenUIEventsSpy = jest.spyOn(component, "listenUIEvents").mockImplementation(jest.fn());
       component.ngOnInit();
       expect(getDataBoardSpy).toHaveBeenCalled();
-      expect(getClickedTaskSpy).toHaveBeenCalled();
-      expect(listenClickInNewTaskButtonSpy).toHaveBeenCalled();
+      expect(listenUIEventsSpy).toHaveBeenCalled();
     })
   })
 
@@ -87,38 +85,20 @@ describe('KanbanBoardComponent', () => {
     });
   })
 
-  describe("getClickedTask", () => {
-    it("should call showTaskDetails when click task and get data", () => {
-      const task:Task = {idTask: 1, title: "task 1", description: "", status: "todo", subtasks: []};
-      const clickTaskSpy = jest.spyOn(uiEventsService, "clickTask").mockReturnValue(of(task));
-      const showTaskDetailsSpy = jest.spyOn(component, "showTaskDetails").mockImplementation(jest.fn());
-      component.getClickedTask();
-      expect(clickTaskSpy).toHaveBeenCalled();
-      expect(showTaskDetailsSpy).toHaveBeenCalledWith(task);
-    })
-    it("should not call showTaskDetails when click task and data is undefined", () => {
-      const clickTaskSpy = jest.spyOn(uiEventsService, "clickTask").mockReturnValue(of(undefined));
-      const showTaskDetailsSpy = jest.spyOn(component, "showTaskDetails").mockImplementation(jest.fn());
-      component.getClickedTask();
-      expect(clickTaskSpy).toHaveBeenCalled();
-      expect(showTaskDetailsSpy).not.toHaveBeenCalled();
-    })
-  })
-
-  describe("listenClickInNewTaskButton", () => {
+  describe("listenUIEvents", () => {
     it("should call showNewTaskModal when click new task is clicked", () => {
-      const clickTaskSpy = jest.spyOn(uiEventsService, "clickNewTask").mockReturnValue(of(true));
+      const clickTaskSpy = jest.spyOn(uiEventsService, "eventClick").mockReturnValue(of({action: UIEvent.clickNewTask}));
       const showNewTaskModalSpy = jest.spyOn(component, "showNewTaskModal").mockImplementation(jest.fn());
-      component.listenClickInNewTaskButton();
+      component.listenUIEvents();
       expect(clickTaskSpy).toHaveBeenCalled();
       expect(showNewTaskModalSpy).toHaveBeenCalled();
     })
     it("should not call showNewTaskModal when click new task is not clicked", () => {
-      const clickTaskSpy = jest.spyOn(uiEventsService, "clickNewTask").mockReturnValue(of(false));
-      const showNewTaskModalSpy = jest.spyOn(component, "showNewTaskModal").mockImplementation(jest.fn());
-      component.listenClickInNewTaskButton();
+      const clickTaskSpy = jest.spyOn(uiEventsService, "eventClick").mockReturnValue(of({action: UIEvent.clickTask}));
+      const showTaskDetailsSpy = jest.spyOn(component, "showTaskDetails").mockImplementation(jest.fn());
+      component.listenUIEvents();
       expect(clickTaskSpy).toHaveBeenCalled();
-      expect(showNewTaskModalSpy).not.toHaveBeenCalled();
+      expect(showTaskDetailsSpy).toHaveBeenCalled();
     })
   })
 

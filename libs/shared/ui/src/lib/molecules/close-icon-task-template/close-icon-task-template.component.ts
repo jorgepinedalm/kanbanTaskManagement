@@ -4,6 +4,8 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Menu, MenuModule } from 'primeng/menu';
 import { ToastModule } from "primeng/toast";
+import { UIEventsService } from '../../../services/ui-libs-events.service';
+import { UIEvent } from '../../../enums/UIEvent.enum';
 
 @Component({
   selector: 'lib-close-icon-task-template',
@@ -18,13 +20,17 @@ export class CloseIconTaskTemplateComponent {
   items: MenuItem[] | undefined;
   @ViewChild('menu') menu?:Menu; 
   
-  constructor(public ref: DynamicDialogRef, public config: DynamicDialogConfig){
+  constructor(
+    public ref: DynamicDialogRef, 
+    public config: DynamicDialogConfig,
+    private uiEventService: UIEventsService
+    ){
     this.idTask = config.data.id;
     this.items = [
       {
-        label: 'Eliminar',
+        label: 'Delete',
         command: () => {
-            console.log("Eliminar")
+            this.uiEventService.setEvent({action:UIEvent.clickDeleteTask})
         }
     }
     ]

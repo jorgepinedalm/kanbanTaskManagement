@@ -58,9 +58,9 @@ describe('TaskComponent', () => {
 
   describe("openTaskDetail", () => {
     it("should call onClick task from ui event services", () => {
-      const onClickTaskSpy = jest.spyOn(_uiEventsService, "onClickTask").mockImplementation(jest.fn());
+      const setEventSpy = jest.spyOn(_uiEventsService, "setEvent").mockImplementation(jest.fn());
       component.openTaskDetail();
-      expect(onClickTaskSpy).toHaveBeenCalled();
+      expect(setEventSpy).toHaveBeenCalled();
     })
   })
 });

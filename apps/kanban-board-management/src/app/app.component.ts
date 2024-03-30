@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ButtonComponent, HeaderComponent, SidebarComponent, UIEventsService } from "@board-management/ui";
+import { ButtonComponent, HeaderComponent, SidebarComponent, UIEvent, UIEventsService } from "@board-management/ui";
 import { BoardsComponent } from './boards/boards.component';
 import { Select } from '@ngxs/store';
 import { Board, BoardState } from '@board-management/shared-store';
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showNewTaskButton():void{
-    this.uiEventsService.onClickNewTask();
+    this.uiEventsService.setEvent({action:UIEvent.clickNewTask})
   }
   
 }

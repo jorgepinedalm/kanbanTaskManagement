@@ -10,3 +10,4 @@ export * from './lib/atoms/input-text/input-text.component';
 export * from './lib/atoms/textarea/textarea.component';
 export * from './services/ui-libs-events.service';
 export * from './directives/strikeOutText.directive';
+export * from './enums/UIEvent.enum';

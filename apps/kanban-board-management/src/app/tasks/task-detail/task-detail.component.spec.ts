@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskDetailComponent } from './task-detail.component';
-import { DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MockComponent } from 'ng-mocks';
-import { CheckboxComponent, DropdownComponent } from '@board-management/ui';
+import { CheckboxComponent, DropdownComponent, UIEvent, UIEventsService } from '@board-management/ui';
 import { NgxsModule, Select, Store } from '@ngxs/store';
 import { BoardState, ColumnStatus } from '@board-management/shared-store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -13,8 +13,8 @@ describe('TaskDetailComponent', () => {
   let store: Store;
   let mockBoardState: BoardState;
   let mockColumnStatus$: BehaviorSubject<ColumnStatus[] | undefined>;
-
-  
+  let uiEventsService: UIEventsService;
+  let ref: DynamicDialogRef;
 
   beforeEach(async () => {
 
@@ -30,7 +30,9 @@ describe('TaskDetailComponent', () => {
         { provide: DynamicDialogConfig, 
           useValue: { data: { idBoard: 1, Board: {} } } },
           { provide: Select, useValue: () => of() },
-          { provide: BoardState, useValue: mockBoardState }
+          { provide: BoardState, useValue: mockBoardState },
+          { provide: DynamicDialogRef, useValue: {close: jest.fn()} },
+          UIEventsService
 
       ]
     }).compileComponents();
@@ -39,6 +41,8 @@ describe('TaskDetailComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     store = TestBed.inject(Store);
+    uiEventsService = TestBed.inject(UIEventsService);
+    ref = TestBed.inject(DynamicDialogRef);
   });
 
   it('should create', () => {
@@ -50,10 +54,12 @@ describe('TaskDetailComponent', () => {
       const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
       const getColumnStatusSpy = jest.spyOn(component, "getColumnStatus").mockImplementation(jest.fn());
       const countSubtaskInDoneSpy = jest.spyOn(component, "countSubtaskInDone").mockImplementation(jest.fn());
+      const listenUIEventsSpy = jest.spyOn(component, "listenUIEvents").mockImplementation(jest.fn());
       component.ngOnInit();
       expect(dispatchSpy).toHaveBeenCalled();
       expect(getColumnStatusSpy).toHaveBeenCalled();
       expect(countSubtaskInDoneSpy).toHaveBeenCalled();
+      expect(listenUIEventsSpy).toHaveBeenCalled();
     })
   })
 
@@ -107,6 +113,17 @@ describe('TaskDetailComponent', () => {
       const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
       component.changeStatus({idTask: 1, title: "task 1", status: "todo", subtasks: [], description: ""});
       expect(dispatchSpy).toHaveBeenCalled();
+    })
+  })
+
+  describe("listenUIEvents", () => {
+    it("should subscribe to event click to delete task", () => {
+      const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
+      const closeSpy = jest.spyOn(ref, "close").mockImplementation(jest.fn());
+      jest.spyOn(uiEventsService, "eventClick").mockReturnValue(of({action: UIEvent.clickDeleteTask}));
+      component.listenUIEvents();
+      expect(dispatchSpy).toHaveBeenCalled();
+      expect(closeSpy).toHaveBeenCalled();
     })
   })
 });

@@ -74,6 +74,20 @@ export class TaskService {
     return of(board);
   }
 
+  deleteTask(idTask:number):Observable<Board | undefined>{
+    let foundBoard = undefined;
+    for(const board of this.boards){
+      for(const column of board.columnStatus){
+        const taskIndex = column.tasks.findIndex(task => task.idTask === idTask);
+        if(taskIndex > -1){
+          column.tasks.splice(taskIndex, 1);
+          foundBoard = board;
+        }
+      }
+    }
+    return of(foundBoard);
+  }
+
   /**
    * Generate id of new task
    */

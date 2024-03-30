@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Task } from '@board-management/shared-store';
 import { UIEventsService } from '../../../services/ui-libs-events.service';
+import { UIEvent } from '../../../enums/UIEvent.enum';
 
 @Component({
   selector: 'lib-task',
@@ -24,7 +25,7 @@ export class TaskComponent implements OnChanges {
   }
 
   openTaskDetail(){
-    this._uiEventsService.onClickTask(this.task as Task);
+    this._uiEventsService.setEvent({action:UIEvent.clickTask, data:{task: this.task}});
   }
   
 }
