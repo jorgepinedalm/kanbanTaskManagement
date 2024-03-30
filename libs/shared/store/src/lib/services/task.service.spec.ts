@@ -272,4 +272,61 @@ describe('TaskService', () => {
     })
   })
 
+  describe("deleteTask", () => {
+    it("should delete task by its id", () => {
+      service['boards'] = [
+        {
+          idBoard: 1,
+          name: "board 1",
+          columnStatus: [
+            {
+              idColumnStatus: 1,
+              name: "todo",
+              order: 1,
+              tasks: [
+                {idTask: 1, title: "task 1", description: "description 1", order: 1, status: "todo", subtasks: [
+                  {idSubtask: 1, title: "new subtask 1", isDone: true}, 
+                  {idSubtask: 2, title: "new subtask 2", isDone: false}
+                ]},
+                {idTask: 2, title: "task 2", description: "description 2", order: 2, status: "todo", subtasks: []},
+                {idTask: 3, title: "task 2", description: "description 3", order: 3, status: "todo", subtasks: []}
+              ]
+            }
+          ]
+        }
+      ];
+      service.deleteTask(2).subscribe(updatedBoard => {
+        expect(updatedBoard?.columnStatus[0].tasks).toHaveLength(2);
+        expect(updatedBoard?.columnStatus[0].tasks[1].idTask).toBe(3);
+      })
+    })
+    it("should not delete task if id task dotn exist", () => {
+      service['boards'] = [
+        {
+          idBoard: 1,
+          name: "board 1",
+          columnStatus: [
+            {
+              idColumnStatus: 1,
+              name: "todo",
+              order: 1,
+              tasks: [
+                {idTask: 1, title: "task 1", description: "description 1", order: 1, status: "todo", subtasks: [
+                  {idSubtask: 1, title: "new subtask 1", isDone: true}, 
+                  {idSubtask: 2, title: "new subtask 2", isDone: false}
+                ]},
+                {idTask: 2, title: "task 2", description: "description 2", order: 2, status: "todo", subtasks: []},
+                {idTask: 3, title: "task 2", description: "description 3", order: 3, status: "todo", subtasks: []}
+              ]
+            }
+          ]
+        }
+      ];
+      service.deleteTask(6).subscribe(updatedBoard => {
+        expect(updatedBoard?.columnStatus[0].tasks).toHaveLength(3);
+        expect(updatedBoard?.columnStatus[0].tasks[1].idTask).toBe(2);
+      })
+    })
+  })
+
 });
