@@ -56,19 +56,19 @@ En la solución presentada pretende cumplir con los requisitos técnicos descrit
 
 ![image](https://github.com/jorgepinedalm/kanbanTaskManagement/assets/19978011/b3fab38c-c992-44db-affa-cb749c024c46)
 
-## Modo oscuro
+### Modo oscuro
 
 ![image](https://github.com/jorgepinedalm/kanbanTaskManagement/assets/19978011/c1cd3c34-4409-4284-ab2e-5ab361fc2c47)
 
-## Barra lateral colapsada
+### Barra lateral colapsada
 
 ![image](https://github.com/jorgepinedalm/kanbanTaskManagement/assets/19978011/a7544f2e-cd38-45ca-8579-cb244e20a47d)
 
-## Modal para crear nueva tarea
+### Modal para crear nueva tarea
 
 ![image](https://github.com/jorgepinedalm/kanbanTaskManagement/assets/19978011/f8540f40-f621-4392-bc67-9f2f38529042)
 
-## Detalle de una tarea
+### Detalle de una tarea
 
 ![image](https://github.com/jorgepinedalm/kanbanTaskManagement/assets/19978011/a85a7baa-f0d6-4733-ba1d-4193793500da)
 
