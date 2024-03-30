@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent, DropdownComponent, InputTextComponent, TextareaComponent } from '@board-management/ui';
 import { Select, Store } from '@ngxs/store';
 import { AddTasks, Board, BoardState, ColumnStatus, GetStatusFromBoard, Task } from '@board-management/shared-store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
@@ -14,12 +14,13 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   templateUrl: './task-create.component.html',
   styleUrl: './task-create.component.scss',
 })
-export class TaskCreateComponent implements OnInit {
+export class TaskCreateComponent implements OnInit, OnDestroy {
   @Select(BoardState.selectStateColumnStatus) status$?: Observable<ColumnStatus[]>;
   columnStatus:ColumnStatus[];
   idBoard:number;
   board:Board;
   taskForm:FormGroup;
+  subscription: Subscription;
 
   constructor(
     private config: DynamicDialogConfig, 
@@ -31,17 +32,23 @@ export class TaskCreateComponent implements OnInit {
     this.idBoard = config.data.idBoard;
     this.board = config.data.Board;
     this.taskForm = this.createForm();
+    this.subscription = new Subscription();
   }
+  
   ngOnInit(): void {
     this.store.dispatch(new GetStatusFromBoard(this.idBoard));
     this.getColumnStatusToCreate();
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   getColumnStatusToCreate(): void{
-    this.status$?.subscribe(columStatus => {
+    this.subscription = this.status$?.subscribe(columStatus => {
       this.columnStatus = columStatus;
       this.status?.setValue(this.columnStatus[0].name);
-    })
+    }) as Subscription;
   }
   
   createForm():FormGroup{

@@ -53,11 +53,12 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   getRouteParam(): void{
-    this.route.params
+    const subscription = this.route.params
     .subscribe(params => {
       const idBoard:number = +params["id"];
       if(idBoard) this.store.dispatch(new GetBoardById(idBoard));
     });
+    this.subscriptions.push(subscription);
   }
 
   getDataBoard(): void{
