@@ -1,5 +1,8 @@
 # Kanban task management web app
 
+## Demo del proyecto desplegado
+[jpinedapps.000webhostapp.com](https://jpinedapps.000webhostapp.com/)
+
 ## Iniciar la aplicación
 
 1. Clonar el repositorio
@@ -26,6 +29,9 @@ Para ejecutar pruebas unitarias `npm run test`
 - Cambiar el estado de la tarea desde la visualización de su detalle. Se actualiza la ubicación de en la columna automáticamente.
 - Arrastrar y soltar las tareas para ordenar entre las tareas de una columna o mover las tareas entre columnas actualizando su estado.
 - Se usa localstorage para mantener la información manejada por el usuario, incluso actualizando página en el navegador.
+
+- Agregar nuevas columnas a los tableros.
+- Eliminar tareas
  
 ## Notas
 
