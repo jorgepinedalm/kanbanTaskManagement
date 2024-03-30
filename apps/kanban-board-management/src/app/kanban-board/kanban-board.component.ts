@@ -34,10 +34,10 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   board?:Board;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _store: Store,
-    private _uiEventService: UIEventsService,
-    public _dialogService: DialogService
+    private route: ActivatedRoute,
+    private store: Store,
+    private uiEventService: UIEventsService,
+    public dialogService: DialogService
     ){
       this.subscriptions = [];
       this.getRouteParam();
@@ -53,10 +53,10 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   getRouteParam(): void{
-    this._route.params
+    this.route.params
     .subscribe(params => {
       const idBoard:number = +params["id"];
-      if(idBoard) this._store.dispatch(new GetBoardById(idBoard));
+      if(idBoard) this.store.dispatch(new GetBoardById(idBoard));
     });
   }
 
@@ -68,7 +68,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   getClickedTask(): void {
-    const subscription = this._uiEventService.clickTask().subscribe(task => {
+    const subscription = this.uiEventService.clickTask().subscribe(task => {
       if(task){
         this.showTaskDetails(task);
       }
@@ -77,7 +77,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   listenClickInNewTaskButton(): void {
-    const subscription = this._uiEventService.clickNewTask().subscribe(isClicked => {
+    const subscription = this.uiEventService.clickNewTask().subscribe(isClicked => {
       if(isClicked){
         this.showNewTaskModal();
       }
@@ -86,7 +86,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   showTaskDetails(task:Task): void {
-    this._dialogService.open(TaskDetailComponent, {
+    this.dialogService.open(TaskDetailComponent, {
       header: task.title,
       ...configDynamicDialog,
       data: {
@@ -101,7 +101,7 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   }
 
   showNewTaskModal(): void {
-    this._dialogService.open(TaskCreateComponent, {
+    this.dialogService.open(TaskCreateComponent, {
       header: "Add New Task",
       ...configDynamicDialog,
       data: {
