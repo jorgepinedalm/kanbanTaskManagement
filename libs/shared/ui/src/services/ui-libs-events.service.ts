@@ -9,12 +9,10 @@ import { UIEvents } from '../models/ui-events.model';
 export class UIEventsService {
 
   private clickTask$: BehaviorSubject<Task | undefined>;
-  private clickNewTask$: BehaviorSubject<boolean>;
   private actionClick$: BehaviorSubject<UIEvents | null>;
 
   constructor() { 
     this.clickTask$ = new BehaviorSubject<Task | undefined>(undefined);
-    this.clickNewTask$ = new BehaviorSubject<boolean>(false);
     this.actionClick$ = new BehaviorSubject<UIEvents | null>(null);
   }
 
@@ -28,14 +26,6 @@ export class UIEventsService {
    */
   onClickTask(task:Task ): void {
     this.clickTask$.next(task);
-  }
-
-  clickNewTask(): Observable<boolean>{
-    return this.clickNewTask$.asObservable();
-  }
-
-  onClickNewTask(): void {
-    this.clickNewTask$.next(true);
   }
 
   eventClick(): Observable<UIEvents | null>{

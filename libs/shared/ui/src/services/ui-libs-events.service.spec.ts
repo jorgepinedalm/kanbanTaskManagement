@@ -2,17 +2,16 @@ import { TestBed } from '@angular/core/testing';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '@board-management/shared-store';
 import { UIEventsService } from './ui-libs-events.service';
+import { UIEvent } from '../enums/UIEvent.enum';
 
 describe('UIEventsService', () => {
   let service: UIEventsService;
   let clickTaskSubject: BehaviorSubject<Task | undefined>;
-  let clickNewTaskSubject: BehaviorSubject<boolean>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
     service = TestBed.inject(UIEventsService);
     clickTaskSubject = service['clickTask$'] as BehaviorSubject<Task | undefined>;
-    clickNewTaskSubject = service['clickNewTask$'] as BehaviorSubject<boolean>;
   });
 
   it('should be created', () => {
@@ -37,21 +36,13 @@ describe('UIEventsService', () => {
     });
   });
 
-  describe('clickNewTask', () => {
-    it('should return clickNewTask$ observable', () => {
-      const clickNewTask$ = service.clickNewTask();
-      expect(clickNewTask$).toBeInstanceOf(Observable);
-    });
-
-    it('should emit true when onClickNewTask is called', () => {
-      let emittedValue: boolean | undefined;
-      const subscription = service.clickNewTask().subscribe((value) => {
-        emittedValue = value;
-      });
-      service.onClickNewTask();
-      expect(emittedValue).toBe(true);
-      subscription.unsubscribe();
-    });
-  });
+  describe("eventClick", () => {
+    it("should get event click", () => {
+      service.setEvent({action: UIEvent.clickTask});
+      service.eventClick().subscribe(event => {
+        expect(event?.action).toEqual(UIEvent.clickTask);
+      })
+    })
+  })
 });
 

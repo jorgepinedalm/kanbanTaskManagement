@@ -38,7 +38,21 @@ describe('ColumnComponent', () => {
         previousIndex: 0,
         currentIndex: 1
       };
-      //jest.mock('moveItemInArray');
+      const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
+      component.drop(mockDropEvent);
+      expect(dispatchSpy).toHaveBeenCalled();
+    });
+
+    it('should move item in array and dispatch UpdateTasksInColumn action if previousContainer equals container and columnStatus is undefined', () => {
+      const mockTasks: Task[] = [{ idTask: 1, title: 'Task 1', status: 'ToDo', subtasks: [], description: "" }, { idTask: 2, title: 'Task 2', status: 'ToDo', subtasks: [], description: "" }];
+      const mockData = {data: mockTasks};
+      component.columnStatus = undefined;
+      const mockDropEvent: any = {
+        previousContainer: <any>mockData,
+        container: <any>mockData,
+        previousIndex: 0,
+        currentIndex: 1
+      };
       const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
       component.drop(mockDropEvent);
       expect(dispatchSpy).toHaveBeenCalled();
@@ -57,6 +71,21 @@ describe('ColumnComponent', () => {
       component.drop(mockDropEvent);
       expect(dispatchSpy).toHaveBeenCalled();
       expect(mockCurrentTasks[1].status).toBe('InProgress');
+    });
+
+    it('should transfer item between arrays, update status and dispatch UpdateTasksInColumn action if previousContainer not equals container and columnName is not defined', () => {
+      const mockPreviousTasks: Task[] = [{ idTask: 1, title: 'Task 1', status: 'ToDo', subtasks: [], description: "" }];
+      const mockCurrentTasks: Task[] = [{ idTask: 2, title: 'Task 2', status: 'InProgress', subtasks: [], description: ""  }];
+      const mockDropEvent: any = {
+        previousContainer: <any>{ data: mockPreviousTasks, element: { nativeElement: { dataset: { idcolumn: '1' } } } },
+        container: <any>{ data: mockCurrentTasks, element: { nativeElement: { dataset: { idcolumn: '2' } } } },
+        previousIndex: 0,
+        currentIndex: 1
+      };
+      const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
+      component.drop(mockDropEvent);
+      expect(dispatchSpy).toHaveBeenCalled();
+      expect(mockCurrentTasks[1].status).toBe('');
     });
   });
 

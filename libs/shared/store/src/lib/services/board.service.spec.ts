@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { BoardService } from './board.service';
 import { Board } from '../models/board.model';
+import { ColumnStatus } from '../models/column-status.model';
 
 describe('BoardService', () => {
   let service: BoardService;
@@ -85,5 +86,45 @@ describe('BoardService', () => {
     })
   })
 
+  describe("getStatusFromBoard", () => {
+    it("should get status from board columns", () => {
+      const columnStatus:ColumnStatus[] = [{idColumnStatus: 1, name: "column 1", tasks: []}]
+      const mockBoard:Board = {idBoard: 5, name: "board 5", columnStatus: columnStatus};
+      service['boards'] = [mockBoard];
+      service.getStatusFromBoard(5).subscribe(status => {
+        expect(status).toEqual(columnStatus);
+      })
+    })
+    it("should get empty array if idboard dont exist", () => {
+      const columnStatus:ColumnStatus[] = [{idColumnStatus: 1, name: "column 1", tasks: []}]
+      const mockBoard:Board = {idBoard: 5, name: "board 5", columnStatus: columnStatus};
+      service['boards'] = [mockBoard];
+      service.getStatusFromBoard(6).subscribe(status => {
+        expect(status).toHaveLength(0)
+      })
+    })
+  })
+
+  describe("addColumn", () => {
+    it("should add new column in board", () => {
+      const newColumn = {idColumnStatus: 0, name: "column 2", tasks: []};
+      const columnStatus:ColumnStatus[] = [{idColumnStatus: 3, name: "column 1", tasks: []}]
+      const mockBoard:Board = {idBoard: 5, name: "board 5", columnStatus: columnStatus};
+      service['boards'] = [mockBoard];
+      service.addColumn(5, newColumn).subscribe(board => {
+        expect(board.columnStatus).toHaveLength(2);
+        expect(board.columnStatus[1].idColumnStatus).toEqual(4);
+      })
+    })
+    it("should not add new column in board if idboard dont exist", () => {
+      const newColumn = {idColumnStatus: 0, name: "column 2", tasks: []};
+      const columnStatus:ColumnStatus[] = [{idColumnStatus: 1, name: "column 1", tasks: []}]
+      const mockBoard:Board = {idBoard: 5, name: "board 5", columnStatus: columnStatus};
+      service['boards'] = [mockBoard];
+      service.addColumn(6, newColumn).subscribe(board => {
+        expect(board.columnStatus).toHaveLength(1);
+      })
+    })
+  })
   
 });
