@@ -62,13 +62,11 @@ export class TaskCreateComponent implements OnInit {
 
   deleteSubtask(index: number) {
     this.subtasks.removeAt(index);
-    console.log(this.subtasks);
   }
 
   saveTask():void{
     if(this.taskForm.valid){
       const newTask:Task = this.taskForm.getRawValue();
-      console.log(this.taskForm.getRawValue());
       this.store.dispatch(new AddTasks(newTask, this.idBoard));
       this.ref.close();
     }

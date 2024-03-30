@@ -3,26 +3,30 @@ import { TaskCreateComponent } from './task-create.component';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { NgxsModule, Store } from '@ngxs/store';
 import { BoardState, GetStatusFromBoard } from '@board-management/shared-store';
-import { FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 describe('TaskCreateComponent', () => {
   let component: TaskCreateComponent;
   let fixture: ComponentFixture<TaskCreateComponent>;
   let store: Store;
+  let formBuilder: FormBuilder;
+  let ref: DynamicDialogRef;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [TaskCreateComponent, NgxsModule.forRoot([BoardState])],
       providers: [
         { provide: DynamicDialogConfig, useValue: { data: { idBoard: 1, Board: {} } } },
-        { provide: DynamicDialogRef, useValue: {} }
+        { provide: DynamicDialogRef, useValue: {close: jest.fn()} }
       ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TaskCreateComponent);
     component = fixture.componentInstance;
+    formBuilder = TestBed.inject(FormBuilder);
     fixture.detectChanges();
     store = TestBed.inject(Store);
+    ref = TestBed.inject(DynamicDialogRef);
   });
 
   it('should create', () => {
@@ -61,4 +65,64 @@ describe('TaskCreateComponent', () => {
 
     expect(component.subtasks.length).toBe(initialSubtasksCount + 1);
   });
+
+  it('should remove subtask at the given index', () => {
+    const subtasksArray: FormArray = formBuilder.array([
+      formBuilder.group({
+        title: 'Subtask 1',
+        isDone: false
+      }),
+      formBuilder.group({
+        title: 'Subtask 2',
+        isDone: false
+      }),
+      formBuilder.group({
+        title: 'Subtask 3',
+        isDone: false
+      })
+    ]);
+
+    component.taskForm = formBuilder.group({
+      subtasks: subtasksArray
+    });
+
+    const indexToRemove = 1;
+
+    component.deleteSubtask(indexToRemove);
+
+    const subtasksAfterDelete: any[] = component.taskForm.get('subtasks')?.value;
+    expect(subtasksAfterDelete.length).toEqual(2); // Check if subtask has been removed
+    expect(subtasksAfterDelete[0].title).toEqual('Subtask 1'); // Check remaining subtasks
+    expect(subtasksAfterDelete[1].title).toEqual('Subtask 3');
+  });
+
+  describe("saveTask", () => {
+    it('should dispatch AddTasks action and close dialog if form is valid', () => {
+      component.taskForm.patchValue(
+        {
+          title: 'Task title',
+          description: 'Task description',
+          status: 'todo',
+        }
+      )
+      const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
+      const closeSpy = jest.spyOn(ref, "close").mockImplementation(jest.fn());
+  
+      component.saveTask();
+  
+      expect(dispatchSpy).toHaveBeenCalled();
+      expect(closeSpy).toHaveBeenCalled();
+    });
+    it('should not dispatch AddTasks action and close dialog if form is invalid', () => {
+      const dispatchSpy = jest.spyOn(store, "dispatch").mockImplementation(jest.fn());
+      const closeSpy = jest.spyOn(ref, "close").mockImplementation(jest.fn());
+  
+      component.saveTask();
+  
+      expect(dispatchSpy).not.toHaveBeenCalled();
+      expect(closeSpy).not.toHaveBeenCalled();
+    });
+  })
+  
+
 });
