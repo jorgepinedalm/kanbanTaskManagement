@@ -32,8 +32,6 @@ export class CloseIconTaskTemplateComponent {
 
   clickButton(event:any):void{
     event.stopPropagation();
-    console.log(this.menu);
     this.menu?.toggle(event);
-    console.log("click: ", this.idTask);
   }
 }
