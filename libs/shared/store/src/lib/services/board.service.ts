@@ -47,4 +47,29 @@ export class BoardService {
     }
     return of(status);
   }
+
+  addColumn(idBoard: number, column:ColumnStatus):Observable<Board>{
+    const foundBoard = this.boards.find(board => board.idBoard == idBoard);
+    if(foundBoard){
+      column.idColumnStatus = this.getNextColumnId(idBoard);
+      foundBoard.columnStatus.push(column);
+    }
+    return of(foundBoard as Board);
+  }
+
+  /**
+   * Generate id of new task
+   */
+  private getNextColumnId(idBoard:number):number{
+    let maxId = 0;
+    const board = this.boards.find(board => board.idBoard === idBoard);
+    if(board){
+      for (const column of board.columnStatus) {
+        if (column.idColumnStatus > maxId) {
+          maxId = column.idColumnStatus;
+        }
+      }
+    }
+    return maxId + 1;
+  }
 }

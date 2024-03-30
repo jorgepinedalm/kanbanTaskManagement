@@ -8,6 +8,7 @@ import { ColumnStatus } from "../models/column-status.model";
 import { AddTasks, ChangeTaskStatus, UpdateTasksInColumn } from "../actions/task.actions";
 import { TaskService } from "../services/task.service";
 import { ChangeSubtaskStatus } from "../actions/subtask.actions";
+import { AddColumnInBoard } from "../actions/column.actions";
 
 @State<BoardStateModel>({
     name: 'appstate',
@@ -124,6 +125,20 @@ export class BoardState {
     @Action(AddTasks)
     addTask(ctx: StateContext<BoardStateModel>, { payload, idBoard}: AddTasks) {
         return this._taskService.addTask(idBoard, payload).pipe(tap((returnData) => {
+            const state = ctx.getState();
+            const board = state.boards.find(board => board.idBoard == returnData?.idBoard);
+            if (board) {
+                ctx.patchState({
+                    ...state,
+                    selectedBoard: returnData
+                });
+            }
+        }));
+    }
+
+    @Action(AddColumnInBoard)
+    addColumn(ctx: StateContext<BoardStateModel>, { payload, idBoard}: AddColumnInBoard) {
+        return this._boardService.addColumn(idBoard, payload).pipe(tap((returnData) => {
             const state = ctx.getState();
             const board = state.boards.find(board => board.idBoard == returnData?.idBoard);
             if (board) {

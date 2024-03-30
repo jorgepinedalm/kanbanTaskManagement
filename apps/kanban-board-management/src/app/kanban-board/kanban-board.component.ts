@@ -7,6 +7,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Observable, Subscription } from 'rxjs';
 import { TaskDetailComponent } from '../tasks/task-detail/task-detail.component';
 import { TaskCreateComponent } from '../tasks/task-create/task-create.component';
+import { ColumnCreateComponent } from './column-create/column-create.component';
 
 const configDynamicDialog = {
   width: "33vw",
@@ -104,6 +105,17 @@ export class KanbanBoardComponent implements OnInit, OnDestroy {
   showNewTaskModal(): void {
     this.dialogService.open(TaskCreateComponent, {
       header: "Add New Task",
+      ...configDynamicDialog,
+      data: {
+        idBoard: this.board?.idBoard,
+        board: this.board
+      }
+    });
+  }
+
+  showCreateColumn(): void {
+    this.dialogService.open(ColumnCreateComponent, {
+      header: "Add New Column",
       ...configDynamicDialog,
       data: {
         idBoard: this.board?.idBoard,

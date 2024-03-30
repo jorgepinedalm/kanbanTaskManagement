@@ -4,6 +4,6 @@ export interface ColumnStatus{
     idColumnStatus:number;
     name:string;
     color?:string;
-    order:number;
+    order?:number;
     tasks:Task[];  
   }

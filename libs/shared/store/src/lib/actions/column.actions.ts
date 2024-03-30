@@ -9,7 +9,7 @@ export class GetColumnsByIdBoard {
 //Create
 export class AddColumnInBoard {
     static readonly type = '[Columns] Add columns';
-    constructor(payload: ColumnStatus, public idBoard: number) { }
+    constructor(public payload: ColumnStatus, public idBoard: number) { }
 }
 
 //Delete

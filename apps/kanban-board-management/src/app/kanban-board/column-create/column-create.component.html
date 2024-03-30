@@ -1,0 +1,11 @@
+<div class="column-create">
+    <form [formGroup]="columnForm" (ngSubmit)="saveColumn()">
+        <div class="form-control">
+            <label for="name">Name</label>
+            <lib-input-text type="text" formControlName="name" inputId="name" maxLength="255" [required]="true" placeholder="e.g. Test" styleClass="w-full"></lib-input-text>
+        </div>
+        <lib-button type="submit" styleClass="w-full">
+            Create column
+        </lib-button>
+    </form>
+</div>

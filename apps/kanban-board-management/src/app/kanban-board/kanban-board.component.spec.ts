@@ -151,6 +151,21 @@ describe('KanbanBoardComponent', () => {
       expect(openSpy).toHaveBeenCalled();
     })
   })
+
+  describe("showCreateColumn", () => {
+    it("should open dialog", () => {
+      const openSpy = jest.spyOn(dialogService, "open").mockImplementation(jest.fn());
+      component.showCreateColumn();
+      expect(openSpy).toHaveBeenCalled();
+    })
+    it("should open dialog with board defined", () => {
+      component.board = <any>{idBoard: 1};
+      const openSpy = jest.spyOn(dialogService, "open").mockImplementation(jest.fn());
+      component.showCreateColumn();
+      expect(openSpy).toHaveBeenCalled();
+    })
+  })
+  
   
   
 });

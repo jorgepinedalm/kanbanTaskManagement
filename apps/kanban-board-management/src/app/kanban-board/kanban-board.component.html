@@ -3,6 +3,7 @@
         @for (column of board.columnStatus; track column; let idx = $index) {
             <lib-column class="kanban-board__columns__column" [columnStatus]="column" [indexColumn]="idx"></lib-column>
         }
+        <div class="kanban-board__columns__column new-colum" role="button" (click)="showCreateColumn()">+ New column</div>
     </div>
     
 </div>
