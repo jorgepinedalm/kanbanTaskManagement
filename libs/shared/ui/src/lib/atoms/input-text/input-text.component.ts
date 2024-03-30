@@ -18,7 +18,7 @@ export const CUSTOM_INPUTTEXT_CONTROL_VALUE_ACCESSOR: Provider = {
 })
 export class InputTextComponent implements ControlValueAccessor {
 
-  private innerInputValue = false;
+  private innerInputValue = '';
   @Input() inputId?:string;
   @Input() styleClass?:string;
   @Input() type:string;
@@ -41,18 +41,18 @@ export class InputTextComponent implements ControlValueAccessor {
     this.disabled = false;
     this.required = false;
   }
-  get value(): boolean {
+  get value(): string {
     return this.innerInputValue;
   }
 
   //set accessor including call the onchange callback
-  set value(v: boolean) {
+  set value(v: string) {
       if (v !== this.innerInputValue) {
           this.innerInputValue = v;
           this.onChangeInputCallback(v);
       }
   }
-  writeValue(value: boolean): void {
+  writeValue(value: string): void {
     if (value !== this.innerInputValue) {
       this.innerInputValue = value;
     }
