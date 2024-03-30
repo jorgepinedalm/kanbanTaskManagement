@@ -69,7 +69,7 @@ export class DropdownComponent implements ControlValueAccessor {
   registerOnTouched(fn: never): void {
     this.onTouchedDropdownCallback = fn;
   }
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 }
