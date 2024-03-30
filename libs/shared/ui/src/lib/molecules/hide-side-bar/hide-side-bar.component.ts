@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Select, Store } from '@ngxs/store';
-import { GetDarkModeStatus, GetSidebarVisibility, ToggleSidebar, UIState } from '@board-management/shared-store';
+import { GetSidebarVisibility, ToggleSidebar, UIState } from '@board-management/shared-store';
 import { Subscription, Observable } from 'rxjs';
 
 @Component({

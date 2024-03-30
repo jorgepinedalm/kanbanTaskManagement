@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BoardsComponent } from './boards.component';
+import { NgxsModule } from '@ngxs/store';
+import { BoardState } from '@board-management/shared-store';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BoardsComponent', () => {
   let component: BoardsComponent;
@@ -7,7 +10,7 @@ describe('BoardsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BoardsComponent],
+      imports: [BoardsComponent, NgxsModule.forRoot([BoardState]), RouterTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BoardsComponent);

@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DarkModeComponent } from './dark-mode.component';
+import { NgxsModule } from '@ngxs/store';
+import { UIState } from '@board-management/shared-store';
 
 describe('DarkModeComponent', () => {
   let component: DarkModeComponent;
@@ -7,7 +9,7 @@ describe('DarkModeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DarkModeComponent],
+      imports: [DarkModeComponent, NgxsModule.forRoot([UIState])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DarkModeComponent);
