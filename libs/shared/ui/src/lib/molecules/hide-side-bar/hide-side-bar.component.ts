@@ -28,15 +28,15 @@ export class HideSideBarComponent  implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.store.dispatch(new GetSidebarVisibility());
-    this.getSidebarVibility();
+    this.getSidebarVisibility();
   }
 
-  toggleSidebarVibility(): void {
+  toggleSidebarVisibility(): void {
     this.hideSidebar = !this.hideSidebar;
     this.store.dispatch(new ToggleSidebar(this.hideSidebar));
   }
 
-  getSidebarVibility(): void{
+  getSidebarVisibility(): void{
     this.suscription = this.hideSidebar$?.subscribe(status => {
       this.hideSidebar = status;
       this.applyHideSidebar(status);
