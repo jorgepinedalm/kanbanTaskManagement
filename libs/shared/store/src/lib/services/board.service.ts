@@ -51,7 +51,7 @@ export class BoardService {
   addColumn(idBoard: number, column:ColumnStatus):Observable<Board>{
     const foundBoard = this.boards.find(board => board.idBoard == idBoard);
     if(foundBoard){
-      column.idColumnStatus = this.getNextColumnId(idBoard);
+      column.idColumnStatus = this.getNextColumnId();
       foundBoard.columnStatus.push(column);
     }
     return of(foundBoard as Board);
@@ -60,10 +60,9 @@ export class BoardService {
   /**
    * Generate id of new task
    */
-  private getNextColumnId(idBoard:number):number{
+  private getNextColumnId():number{
     let maxId = 0;
-    const board = this.boards.find(board => board.idBoard === idBoard);
-    if(board){
+    for(const board of this.boards){
       for (const column of board.columnStatus) {
         if (column.idColumnStatus > maxId) {
           maxId = column.idColumnStatus;
