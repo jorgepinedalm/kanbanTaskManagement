@@ -23,12 +23,10 @@ describe('AppComponent', () => {
 
     mockSelectedBoard$ = new BehaviorSubject<Board | undefined>(undefined);
 
-    // Creamos un mock de BoardState
     mockBoardState = {
-      selectSelectedBoard: jest.fn(() => mockSelectedBoard$) // Espiamos el método para devolver el observable mockeado
-    } as unknown as BoardState; // Convertimos a BoardState
+      selectSelectedBoard: jest.fn(() => mockSelectedBoard$) 
+    } as unknown as BoardState;
 
-    
 
     await TestBed.configureTestingModule({
       declarations: [
@@ -42,7 +40,7 @@ describe('AppComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
       providers: [
         { provide: UIEventsService, useValue: uiEventsServiceMock },
-        { provide: Select, useValue: () => of() }, // Mocking Ngxs Select,
+        { provide: Select, useValue: () => of() },
         { provide: BoardState, useValue: mockBoardState }
       ],
     }).compileComponents();
@@ -66,44 +64,33 @@ describe('AppComponent', () => {
   });
 
   it('should call getSelectedBoard on initialization', () => {
-    // Arrange
     const spy = jest.spyOn(component, 'getSelectedBoard');
 
-    // Act
     component.ngOnInit();
 
-    // Assert
     expect(spy).toHaveBeenCalled();
   });
 
   it('should unsubscribe on component destroy', () => {
-    // Arrange
     const spy = jest.spyOn(component.subscription, 'unsubscribe');
 
-    // Act
     component.ngOnDestroy();
 
-    // Assert
     expect(spy).toHaveBeenCalled();
   });
 
   it('should subscribe to selectedBoard$ on getSelectedBoard', () => {
-    // Arrange
     const mockBoard: Board = { idBoard: 1, name: "board 1", columnStatus: [] };
     component.selectedBoard$ = mockSelectedBoard$.asObservable() as Observable<Board>;
     mockSelectedBoard$.next(mockBoard);
-    // Act
     component.getSelectedBoard();
 
-    // Assert
     expect(component.board).toEqual(mockBoard);
   });
 
   it('should call onClickNewTask on showNewTaskButton', () => {
-    // Act
     component.showNewTaskButton();
 
-    // Assert
     expect(uiEventsServiceMock.onClickNewTask).toHaveBeenCalled();
   });
 });
