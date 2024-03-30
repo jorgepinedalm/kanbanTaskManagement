@@ -18,4 +18,25 @@ describe('TextareaComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set initial value correctly', () => {
+    const initialValue = 'Initial Value';
+    component.writeValue(initialValue);
+    expect(component.value).toEqual(initialValue);
+  });
+
+  it('should call registerOnChange to set the onChange callback', () => {
+    const onChangeCallback = jest.fn();
+    component.registerOnChange(<never>onChangeCallback);
+
+    const newValue = 'New Value';
+    component.value = newValue;
+    expect(onChangeCallback).toHaveBeenCalledWith(newValue);
+  });
+
+  it('should set disabled state correctly', () => {
+    const isDisabled = true;
+    component.setDisabledState(isDisabled);
+    expect(component.disabled).toEqual(isDisabled);
+  });
 });

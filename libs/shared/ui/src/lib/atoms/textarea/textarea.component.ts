@@ -18,7 +18,7 @@ export const CUSTOM_TEXTAREA_CONTROL_VALUE_ACCESSOR: Provider = {
 })
 export class TextareaComponent  implements ControlValueAccessor {
 
-  private innerTextareaValue = false;
+  private innerTextareaValue = '';
   @Input() inputId?:string;
   @Input() styleClass?:string;
   @Input() placeholder?:string;
@@ -41,18 +41,18 @@ export class TextareaComponent  implements ControlValueAccessor {
     this.required = false;
     this.rows = "2";
   }
-  get value(): boolean {
+  get value(): string {
     return this.innerTextareaValue;
   }
 
   //set accessor including call the onchange callback
-  set value(v: boolean) {
+  set value(v: string) {
       if (v !== this.innerTextareaValue) {
           this.innerTextareaValue = v;
           this.onChangeTextareaCallback(v);
       }
   }
-  writeValue(value: boolean): void {
+  writeValue(value: string): void {
     if (value !== this.innerTextareaValue) {
       this.innerTextareaValue = value;
     }
