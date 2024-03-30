@@ -33,7 +33,7 @@ export class UiService {
     return of(this.hideSidebar);
   }
   getSideBarVisibility():Observable<boolean>{
-    const hideSidebar = localStorage.getItem("hideSidebar") === "true";
+    const hideSidebar = localStorage.getItem("hideSidebar") === "true" || window.innerWidth <= 425;
     return of(hideSidebar);
   }
 }
