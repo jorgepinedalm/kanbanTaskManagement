@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Board, BoardState, GetBoards } from '@board-management/shared-store';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-boards',
@@ -15,9 +15,16 @@ import { RouterModule } from '@angular/router';
 export class BoardsComponent implements OnInit {
   @Select(BoardState.selectStateBoard) boards$?: Observable<Board[]>;
 
-  constructor(private store:Store){}
+  constructor(private store:Store, private router:Router){}
 
   ngOnInit(): void {
     this.store.dispatch(new GetBoards());
+    this.redirectToFirstBoard();
+  }
+
+  redirectToFirstBoard(): void {
+    this.boards$?.subscribe(boards => {
+      if(boards.length > 0) this.router.navigateByUrl(`kanban-board/${boards[0].idBoard}`).catch(err => console.error(err));
+    })
   }
 }

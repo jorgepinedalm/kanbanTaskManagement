@@ -51,4 +51,12 @@ describe('DropdownComponent', () => {
     component.value = true;
     expect(onChangeCallback).toHaveBeenCalledWith(true);
   });
+
+  describe("registerOnTouched", () => {
+    it("should onTouchedDropdownCallback to be defined", () => {
+      const mockFuntion = jest.fn();
+      component.registerOnChange(<never>mockFuntion);
+      expect(component.onTouchedDropdownCallback).toBeDefined();
+    })
+  })
 });
