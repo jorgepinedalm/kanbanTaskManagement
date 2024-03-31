@@ -85,6 +85,7 @@ export class TaskService {
         }
       }
     }
+    localStorage.setItem("boards", JSON.stringify(this.boards));
     return of(foundBoard);
   }
 
