@@ -19,6 +19,8 @@ Para ejecutar pruebas unitarias `npm run test`
 - [NGXS](https://www.ngxs.io/)
 - [PrimeNG](https://primeng.org/)
 
+> **Dado que se usó la versión 18 de NX (angular 17.2), se debe usa una versión de Node.js mayor o igual a 18.13.0 para ejecutar la aplicación.**
+
 ## Funcionalidades entregadas
 - Carga inicial de tareas de manera predeterminada.
 - Alternar el tema entre modo claro/oscuro.
@@ -38,7 +40,7 @@ Para ejecutar pruebas unitarias `npm run test`
 La solución entregada esta realizada en Angular usando el manejador de monorepos NX en su versión 18 (versión angular 17.2).
 Debido a esto, el proyecto consta de una aplicación `kanban-board-management` donde se ubican los componentes y módulos relacionados directamente con la temática de la prueba y de unas librerías (`libs`) que contienen la lógica para el manejo de estado (`store`) y los componentes reutilizables aplicando la arquitectura "Atomic Design" (`ui`). 
 
-Se usó el paquete NGXS para gestionar el estado de la aplicación. Para el manejo de la información se creó un servicio para establecer una carga inicial de los datos visualizados cuya estructura consta de: Boards --> ColumnsState --> Tasks --> Subtasks. Los atributos de cada entidad pueden detallarse en `libs/shared/store/src/lib/models`. Se usa Localstorage para almacenar la información manejada según las acciones destinadas para eso.
+Se usó el paquete NGXS para gestionar el estado de la aplicación. Para el manejo de la información se creó un servicio para establecer una carga inicial de los datos visualizados cuya estructura consta de: Boards --> ColumnsState --> Tasks --> Subtasks. Los atributos de cada entidad pueden detallarse en `libs/shared/store/src/lib/models`. Se usa Localstorage para almacenar la información manejada según las acciones destinadas para eso. Se dejó integrado @ngxs/logger-plugin para que pueda mirar facilmente en la consola del navegador el manejo del estado logrado.
 
 Como framework se usó Primeng y parte de utilidades CSS de Tailwind. Además, se incluyó Google Fonts para los iconos usados. Aunque se usó como Primeng y Tailwind, gran parte de los estilos visualizados fueron creados o modificados manualmente a través de los archivos de estilos de los componentes creados immplementando en gran parte la metodología BEM. Esto para coincidir con los estilos propuestos en las capturas de pantallas del documento de la prueba.
 
