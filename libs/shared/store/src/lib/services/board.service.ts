@@ -54,6 +54,7 @@ export class BoardService {
       column.idColumnStatus = this.getNextColumnId();
       foundBoard.columnStatus.push(column);
     }
+    localStorage.setItem("boards", JSON.stringify(this.boards));
     return of(foundBoard as Board);
   }
 
